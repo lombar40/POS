@@ -37,15 +37,15 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pOS2DataSet = new POS_C.POS2DataSet();
-            this.inventoryTableAdapter = new POS_C.POS2DataSetTableAdapters.InventoryTableAdapter();
-            this.tableAdapterManager = new POS_C.POS2DataSetTableAdapters.TableAdapterManager();
+            this.pOSDataSet = new POS_C.POSDataSet();
+            this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
+            this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
             this.resetButton = new System.Windows.Forms.Button();
             this.searchErrorLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pOS2DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // inventoryDataGridView
@@ -118,12 +118,12 @@
             // inventoryBindingSource
             // 
             this.inventoryBindingSource.DataMember = "Inventory";
-            this.inventoryBindingSource.DataSource = this.pOS2DataSet;
+            this.inventoryBindingSource.DataSource = this.pOSDataSet;
             // 
-            // pOS2DataSet
+            // pOSDataSet
             // 
-            this.pOS2DataSet.DataSetName = "POS2DataSet";
-            this.pOS2DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.pOSDataSet.DataSetName = "POSDataSet";
+            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // inventoryTableAdapter
             // 
@@ -133,7 +133,7 @@
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.InventoryTableAdapter = this.inventoryTableAdapter;
-            this.tableAdapterManager.UpdateOrder = POS_C.POS2DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UpdateOrder = POS_C.POSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // resetButton
             // 
@@ -183,7 +183,7 @@
             this.Load += new System.EventHandler(this.inventoryScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pOS2DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,10 +191,10 @@
 
         #endregion
 
-        private POS2DataSet pOS2DataSet;
+        private POSDataSet pOSDataSet;
         private System.Windows.Forms.BindingSource inventoryBindingSource;
-        private POS2DataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;
-        private POS2DataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private POSDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;
+        private POSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DataGridView inventoryDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;

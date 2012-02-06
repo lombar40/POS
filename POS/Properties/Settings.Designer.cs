@@ -26,20 +26,10 @@ namespace POS_C.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=|DataDirectory|\\POS.sdf;Password=mcnutnut")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=|DataDirectory|\\POS.sdf")]
         public string POSConnectionString {
             get {
                 return ((string)(this["POSConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=|DataDirectory|\\POS2.sdf")]
-        public string POS2ConnectionString {
-            get {
-                return ((string)(this["POS2ConnectionString"]));
             }
         }
     }
