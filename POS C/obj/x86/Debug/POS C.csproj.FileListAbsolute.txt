@@ -1,0 +1,12 @@
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\bin\Debug\POS C.exe
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\bin\Debug\POS C.pdb
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\POS_C.homeScreen.resources
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\POS_C.Properties.Resources.resources
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\POS C.exe
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\POS C.pdb
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\bin\Debug\POS2.sdf
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\bin\Debug\POS C.exe.config
+C:\Users\Ryan\Documents\Visual Studio 2010\Projects\POS C\POS C\obj\x86\Debug\POS_C.inventoryScreen.resources
