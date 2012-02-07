@@ -1,7 +1,0 @@
-mkdir POS
-cd POS
-git init
-git remote add origin git@github.com:lombar40/POS.git
-git pull origin master
-
-DELETE BIN AND OBJ FOLDERS BEFORE PUSHING!
