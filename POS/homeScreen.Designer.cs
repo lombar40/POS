@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.viewInventoryButton = new System.Windows.Forms.Button();
+            this.transactionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // viewInventoryButton
@@ -43,11 +44,22 @@
             this.viewInventoryButton.UseVisualStyleBackColor = true;
             this.viewInventoryButton.Click += new System.EventHandler(this.viewInventoryButton_Click);
             // 
+            // transactionButton
+            // 
+            this.transactionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transactionButton.Location = new System.Drawing.Point(297, 259);
+            this.transactionButton.Name = "transactionButton";
+            this.transactionButton.Size = new System.Drawing.Size(122, 42);
+            this.transactionButton.TabIndex = 1;
+            this.transactionButton.Text = "Transactions";
+            this.transactionButton.UseVisualStyleBackColor = true;
+            // 
             // homeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 568);
+            this.Controls.Add(this.transactionButton);
             this.Controls.Add(this.viewInventoryButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -63,6 +75,7 @@
         #endregion
 
         private System.Windows.Forms.Button viewInventoryButton;
+        private System.Windows.Forms.Button transactionButton;
     }
 }
 
