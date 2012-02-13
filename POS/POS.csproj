@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="editInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editInventory.Designer.cs">
+      <DependentUpon>editInventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="homeScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="transactionsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="transactionsScreen.Designer.cs">
+      <DependentUpon>transactionsScreen.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="editInventory.resx">
+      <DependentUpon>editInventory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="homeScreen.resx">
       <DependentUpon>homeScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,6 +118,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="transactionsScreen.resx">
+      <DependentUpon>transactionsScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="POSDataSet.xsc">
       <DependentUpon>POSDataSet.xsd</DependentUpon>

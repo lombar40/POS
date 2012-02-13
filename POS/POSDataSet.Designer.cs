@@ -389,7 +389,7 @@ namespace POS_C {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InventoryRow AddInventoryRow(int SKU, string Description, double Price, int Quantity) {
+            public InventoryRow AddInventoryRow(int SKU, string Description, decimal Price, int Quantity) {
                 InventoryRow rowInventoryRow = ((InventoryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         SKU,
@@ -431,7 +431,7 @@ namespace POS_C {
                 base.Columns.Add(this.columnSKU);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
-                this.columnPrice = new global::System.Data.DataColumn("Price", typeof(double), null, global::System.Data.MappingType.Element);
+                this.columnPrice = new global::System.Data.DataColumn("Price", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPrice);
                 this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantity);
@@ -610,10 +610,10 @@ namespace POS_C {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Price {
+            public decimal Price {
                 get {
                     try {
-                        return ((double)(this[this.tableInventory.PriceColumn]));
+                        return ((decimal)(this[this.tableInventory.PriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Price\' in table \'Inventory\' is DBNull.", e);
@@ -860,7 +860,7 @@ namespace POS_C.POSDataSetTableAdapters {
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "SKU", global::System.Data.DataRowVersion.Current, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p2", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "Description", global::System.Data.DataRowVersion.Current, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p3", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "Price", global::System.Data.DataRowVersion.Current, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p3", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "Price", global::System.Data.DataRowVersion.Current, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@p4", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, true, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, null));
         }
         
@@ -874,17 +874,37 @@ namespace POS_C.POSDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlServerCe.SqlCeCommand[2];
+            this._commandCollection = new global::System.Data.SqlServerCe.SqlCeCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlServerCe.SqlCeCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [SKU], [Description], [Price], [Quantity] FROM [Inventory]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlServerCe.SqlCeCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT [SKU], [Description], [Price], [Quantity] FROM [Inventory] WHERE [SKU] lik" +
-                "e @Search";
+            this._commandCollection[1].CommandText = "SELECT        SKU, Description, Price, Quantity\r\nFROM            Inventory\r\nWHERE" +
+                "          Description LIKE @Description";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@Search", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, true, 0, 0, "SKU", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@Description", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, true, 0, 0, "Description", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[2] = new global::System.Data.SqlServerCe.SqlCeCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT        SKU, Description, Price, Quantity\r\nFROM            Inventory\r\nWHERE" +
+                "          Price\r\nBETWEEN      @From AND @To";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@From", global::System.Data.SqlDbType.Decimal, 19, global::System.Data.ParameterDirection.Input, true, 4, 2, "Price", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@To", global::System.Data.SqlDbType.Decimal, 19, global::System.Data.ParameterDirection.Input, true, 4, 2, "Price", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[3] = new global::System.Data.SqlServerCe.SqlCeCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT        SKU, Description, Price, Quantity\r\nFROM            Inventory\r\nWHERE" +
+                "          Quantity\r\nBETWEEN      @From AND @To";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@From", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, true, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@To", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, true, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[4] = new global::System.Data.SqlServerCe.SqlCeCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "SELECT        SKU, Description, Price, Quantity\r\nFROM            Inventory\r\nWHERE" +
+                "        (SKU = @SKU)";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@SKU", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, true, 0, 0, "SKU", global::System.Data.DataRowVersion.Current, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -915,10 +935,142 @@ namespace POS_C.POSDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillBySKU(POSDataSet.InventoryDataTable dataTable, global::System.Nullable<int> Search) {
+        public virtual int FillByDescription(POSDataSet.InventoryDataTable dataTable, string Description) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((Search.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(Search.Value));
+            if ((Description == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Description));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual POSDataSet.InventoryDataTable GetDataByDescription(string Description) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((Description == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Description));
+            }
+            POSDataSet.InventoryDataTable dataTable = new POSDataSet.InventoryDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByPrice(POSDataSet.InventoryDataTable dataTable, global::System.Nullable<decimal> From, global::System.Nullable<decimal> To) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((From.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(From.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((To.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((decimal)(To.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual POSDataSet.InventoryDataTable GetDataByPrice(global::System.Nullable<decimal> From, global::System.Nullable<decimal> To) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((From.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(From.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((To.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((decimal)(To.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            POSDataSet.InventoryDataTable dataTable = new POSDataSet.InventoryDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByQuantity(POSDataSet.InventoryDataTable dataTable, global::System.Nullable<int> From, global::System.Nullable<int> To) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((From.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(From.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((To.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(To.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual POSDataSet.InventoryDataTable GetDataByQuantity(global::System.Nullable<int> From, global::System.Nullable<int> To) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((From.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(From.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((To.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(To.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            POSDataSet.InventoryDataTable dataTable = new POSDataSet.InventoryDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBySKU(POSDataSet.InventoryDataTable dataTable, global::System.Nullable<int> SKU) {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
+            if ((SKU.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(SKU.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
@@ -934,10 +1086,10 @@ namespace POS_C.POSDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual POSDataSet.InventoryDataTable GetDataBy(global::System.Nullable<int> Search) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((Search.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(Search.Value));
+        public virtual POSDataSet.InventoryDataTable GetDataBy(global::System.Nullable<int> SKU) {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
+            if ((SKU.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(SKU.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
@@ -980,7 +1132,7 @@ namespace POS_C.POSDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> p1, string p2, global::System.Nullable<double> p3, global::System.Nullable<int> p4) {
+        public virtual int Insert(global::System.Nullable<int> p1, string p2, global::System.Nullable<decimal> p3, global::System.Nullable<int> p4) {
             if ((p1.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((int)(p1.Value));
             }
@@ -994,7 +1146,7 @@ namespace POS_C.POSDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(p2));
             }
             if ((p3.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((double)(p3.Value));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(p3.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
