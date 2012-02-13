@@ -36,6 +36,7 @@ namespace POS_C
             this.queryLabel = new System.Windows.Forms.Label();
             this.searchLabel1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.closeInventoryView = new System.Windows.Forms.Button();
             this.searchLabel2 = new System.Windows.Forms.Label();
             this.searchBox2 = new System.Windows.Forms.TextBox();
             this.radioBox = new System.Windows.Forms.GroupBox();
@@ -52,7 +53,6 @@ namespace POS_C
             this.pOSDataSet = new POS_C.POSDataSet();
             this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
             this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
-            this.closeInventoryView = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -134,6 +134,17 @@ namespace POS_C
             this.splitContainer1.SplitterDistance = 206;
             this.splitContainer1.TabIndex = 7;
             this.splitContainer1.TabStop = false;
+            // 
+            // closeInventoryView
+            // 
+            this.closeInventoryView.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeInventoryView.Location = new System.Drawing.Point(61, 524);
+            this.closeInventoryView.Name = "closeInventoryView";
+            this.closeInventoryView.Size = new System.Drawing.Size(75, 23);
+            this.closeInventoryView.TabIndex = 11;
+            this.closeInventoryView.Text = "Close";
+            this.closeInventoryView.UseVisualStyleBackColor = true;
+            this.closeInventoryView.Click += new System.EventHandler(this.closeInventoryView_Click);
             // 
             // searchLabel2
             // 
@@ -291,16 +302,6 @@ namespace POS_C
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.InventoryTableAdapter = this.inventoryTableAdapter;
             this.tableAdapterManager.UpdateOrder = POS_C.POSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // closeInventoryView
-            // 
-            this.closeInventoryView.Location = new System.Drawing.Point(61, 524);
-            this.closeInventoryView.Name = "closeInventoryView";
-            this.closeInventoryView.Size = new System.Drawing.Size(75, 23);
-            this.closeInventoryView.TabIndex = 11;
-            this.closeInventoryView.Text = "Close";
-            this.closeInventoryView.UseVisualStyleBackColor = true;
-            this.closeInventoryView.Click += new System.EventHandler(this.closeInventoryView_Click);
             // 
             // inventoryScreen
             // 
