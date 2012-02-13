@@ -15,5 +15,10 @@ namespace POS_C
         {
             InitializeComponent();
         }
+
+        private void closeTransactions_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

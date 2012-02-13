@@ -22,7 +22,7 @@ namespace POS_C
         {
             // Set table column properties
             this.inventoryDataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            this.inventoryDataGridView.Columns[2].DefaultCellStyle.Format = "c";
+            this.inventoryDataGridView.Columns[2].DefaultCellStyle.Format = "c";        // currency format
             this.inventoryDataGridView.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             // Fill table upon opening of the window with inventory data
@@ -161,6 +161,11 @@ namespace POS_C
             this.searchBox1.Focus();
             this.searchBox1.SelectionStart = 0;
             this.searchBox1.SelectionLength = this.searchBox1.TextLength;
+        }
+
+        private void closeInventoryView_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

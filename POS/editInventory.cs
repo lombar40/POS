@@ -15,5 +15,25 @@ namespace POS_C
         {
             InitializeComponent();
         }
+
+        private void inventoryBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.inventoryBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.pOSDataSet);
+
+        }
+
+        private void editInventory_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'pOSDataSet.Inventory' table. You can move, or remove it, as needed.
+            this.inventoryTableAdapter.Fill(this.pOSDataSet.Inventory);
+
+        }
+
+        private void closeEditInventory_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
