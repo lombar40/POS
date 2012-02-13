@@ -36,6 +36,7 @@ namespace POS_C
             this.queryLabel = new System.Windows.Forms.Label();
             this.searchLabel1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.closeInventoryView = new System.Windows.Forms.Button();
             this.searchLabel2 = new System.Windows.Forms.Label();
             this.searchBox2 = new System.Windows.Forms.TextBox();
             this.radioBox = new System.Windows.Forms.GroupBox();
@@ -116,6 +117,7 @@ namespace POS_C
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.closeInventoryView);
             this.splitContainer1.Panel1.Controls.Add(this.searchLabel2);
             this.splitContainer1.Panel1.Controls.Add(this.searchBox2);
             this.splitContainer1.Panel1.Controls.Add(this.radioBox);
@@ -132,6 +134,17 @@ namespace POS_C
             this.splitContainer1.SplitterDistance = 206;
             this.splitContainer1.TabIndex = 7;
             this.splitContainer1.TabStop = false;
+            // 
+            // closeInventoryView
+            // 
+            this.closeInventoryView.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeInventoryView.Location = new System.Drawing.Point(61, 524);
+            this.closeInventoryView.Name = "closeInventoryView";
+            this.closeInventoryView.Size = new System.Drawing.Size(75, 23);
+            this.closeInventoryView.TabIndex = 11;
+            this.closeInventoryView.Text = "Close";
+            this.closeInventoryView.UseVisualStyleBackColor = true;
+            this.closeInventoryView.Click += new System.EventHandler(this.closeInventoryView_Click);
             // 
             // searchLabel2
             // 
@@ -295,6 +308,7 @@ namespace POS_C
             this.AcceptButton = this.searchButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.closeInventoryView;
             this.ClientSize = new System.Drawing.Size(790, 568);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -342,5 +356,6 @@ namespace POS_C
         private RadioButton priceRadioButton;
         private TextBox searchBox2;
         private Label searchLabel2;
+        private Button closeInventoryView;
     }
 }
