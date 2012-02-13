@@ -93,7 +93,7 @@ namespace POS_C
             // 
             this.queryLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.queryLabel.ForeColor = System.Drawing.Color.Red;
-            this.queryLabel.Location = new System.Drawing.Point(39, 399);
+            this.queryLabel.Location = new System.Drawing.Point(40, 402);
             this.queryLabel.Name = "queryLabel";
             this.queryLabel.Size = new System.Drawing.Size(121, 13);
             this.queryLabel.TabIndex = 5;
@@ -128,8 +128,8 @@ namespace POS_C
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.inventoryDataGridView);
-            this.splitContainer1.Size = new System.Drawing.Size(784, 562);
-            this.splitContainer1.SplitterDistance = 205;
+            this.splitContainer1.Size = new System.Drawing.Size(790, 568);
+            this.splitContainer1.SplitterDistance = 206;
             this.splitContainer1.TabIndex = 7;
             this.splitContainer1.TabStop = false;
             // 
@@ -230,7 +230,7 @@ namespace POS_C
             this.inventoryDataGridView.RowHeadersVisible = false;
             this.inventoryDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.inventoryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.inventoryDataGridView.Size = new System.Drawing.Size(575, 562);
+            this.inventoryDataGridView.Size = new System.Drawing.Size(580, 568);
             this.inventoryDataGridView.TabIndex = 0;
             this.inventoryDataGridView.TabStop = false;
             // 
@@ -295,7 +295,7 @@ namespace POS_C
             this.AcceptButton = this.searchButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(790, 568);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
