@@ -100,6 +100,7 @@
     </Compile>
     <EmbeddedResource Include="editInventory.resx">
       <DependentUpon>editInventory.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="homeScreen.resx">
       <DependentUpon>homeScreen.cs</DependentUpon>
