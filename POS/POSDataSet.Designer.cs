@@ -874,7 +874,7 @@ namespace POS_C.POSDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlServerCe.SqlCeCommand[5];
+            this._commandCollection = new global::System.Data.SqlServerCe.SqlCeCommand[6];
             this._commandCollection[0] = new global::System.Data.SqlServerCe.SqlCeCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [SKU], [Description], [Price], [Quantity] FROM [Inventory]";
@@ -905,6 +905,15 @@ namespace POS_C.POSDataSetTableAdapters {
                 "        (SKU = @SKU)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@SKU", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, true, 0, 0, "SKU", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[5] = new global::System.Data.SqlServerCe.SqlCeCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = "UPDATE Inventory\r\nSET Description=@description, Price=@price, Quantity=@quantity\r" +
+                "\nWHERE SKU=@sku";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@description", global::System.Data.SqlDbType.NVarChar, 100, global::System.Data.ParameterDirection.Input, true, 0, 0, "Description", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@price", global::System.Data.SqlDbType.Decimal, 19, global::System.Data.ParameterDirection.Input, true, 4, 2, "Price", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@quantity", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, true, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlServerCe.SqlCeParameter("@sku", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, true, 0, 0, "SKU", global::System.Data.DataRowVersion.Original, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1171,6 +1180,53 @@ namespace POS_C.POSDataSetTableAdapters {
                     this.Adapter.InsertCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string description, global::System.Nullable<decimal> price, global::System.Nullable<int> quantity, global::System.Nullable<int> sku) {
+            global::System.Data.SqlServerCe.SqlCeCommand command = this.CommandCollection[5];
+            if ((description == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(description));
+            }
+            if ((price.HasValue == true)) {
+                command.Parameters[1].Value = ((decimal)(price.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((quantity.HasValue == true)) {
+                command.Parameters[2].Value = ((int)(quantity.Value));
+            }
+            else {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((sku.HasValue == true)) {
+                command.Parameters[3].Value = ((int)(sku.Value));
+            }
+            else {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

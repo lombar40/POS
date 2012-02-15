@@ -36,20 +36,20 @@
             this.retrieveItemButton = new System.Windows.Forms.Button();
             this.addNewItemButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.pOSDataSet = new POS_C.POSDataSet();
-            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
-            this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
             this.sKUTextBox = new System.Windows.Forms.TextBox();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.priceTextBox = new System.Windows.Forms.TextBox();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
+            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pOSDataSet = new POS_C.POSDataSet();
+            this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
+            this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
             sKULabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             priceLabel = new System.Windows.Forms.Label();
             quantityLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // sKULabel
@@ -119,15 +119,50 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // pOSDataSet
+            // sKUTextBox
             // 
-            this.pOSDataSet.DataSetName = "POSDataSet";
-            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.sKUTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "SKU", true));
+            this.sKUTextBox.Location = new System.Drawing.Point(192, 247);
+            this.sKUTextBox.Name = "sKUTextBox";
+            this.sKUTextBox.Size = new System.Drawing.Size(66, 20);
+            this.sKUTextBox.TabIndex = 0;
+            // 
+            // descriptionTextBox
+            // 
+            this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Description", true));
+            this.descriptionTextBox.Enabled = false;
+            this.descriptionTextBox.Location = new System.Drawing.Point(264, 247);
+            this.descriptionTextBox.Name = "descriptionTextBox";
+            this.descriptionTextBox.Size = new System.Drawing.Size(251, 20);
+            this.descriptionTextBox.TabIndex = 1;
+            // 
+            // priceTextBox
+            // 
+            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Price", true));
+            this.priceTextBox.Enabled = false;
+            this.priceTextBox.Location = new System.Drawing.Point(518, 247);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(100, 20);
+            this.priceTextBox.TabIndex = 2;
+            // 
+            // quantityTextBox
+            // 
+            this.quantityTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Quantity", true));
+            this.quantityTextBox.Enabled = false;
+            this.quantityTextBox.Location = new System.Drawing.Point(627, 247);
+            this.quantityTextBox.Name = "quantityTextBox";
+            this.quantityTextBox.Size = new System.Drawing.Size(100, 20);
+            this.quantityTextBox.TabIndex = 3;
             // 
             // inventoryBindingSource
             // 
             this.inventoryBindingSource.DataMember = "Inventory";
             this.inventoryBindingSource.DataSource = this.pOSDataSet;
+            // 
+            // pOSDataSet
+            // 
+            this.pOSDataSet.DataSetName = "POSDataSet";
+            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // inventoryTableAdapter
             // 
@@ -138,41 +173,6 @@
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.InventoryTableAdapter = this.inventoryTableAdapter;
             this.tableAdapterManager.UpdateOrder = POS_C.POSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // sKUTextBox
-            // 
-            this.sKUTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "SKU", true));
-            this.sKUTextBox.Location = new System.Drawing.Point(192, 247);
-            this.sKUTextBox.Name = "sKUTextBox";
-            this.sKUTextBox.Size = new System.Drawing.Size(66, 20);
-            this.sKUTextBox.TabIndex = 14;
-            // 
-            // descriptionTextBox
-            // 
-            this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Description", true));
-            this.descriptionTextBox.Enabled = false;
-            this.descriptionTextBox.Location = new System.Drawing.Point(264, 247);
-            this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(251, 20);
-            this.descriptionTextBox.TabIndex = 16;
-            // 
-            // priceTextBox
-            // 
-            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Price", true));
-            this.priceTextBox.Enabled = false;
-            this.priceTextBox.Location = new System.Drawing.Point(518, 247);
-            this.priceTextBox.Name = "priceTextBox";
-            this.priceTextBox.Size = new System.Drawing.Size(100, 20);
-            this.priceTextBox.TabIndex = 18;
-            // 
-            // quantityTextBox
-            // 
-            this.quantityTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Quantity", true));
-            this.quantityTextBox.Enabled = false;
-            this.quantityTextBox.Location = new System.Drawing.Point(627, 247);
-            this.quantityTextBox.Name = "quantityTextBox";
-            this.quantityTextBox.Size = new System.Drawing.Size(100, 20);
-            this.quantityTextBox.TabIndex = 20;
             // 
             // editInventory
             // 
@@ -196,8 +196,8 @@
             this.Name = "editInventory";
             this.Text = "Edit Inventory";
             this.Load += new System.EventHandler(this.editInventory_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

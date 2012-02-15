@@ -78,13 +78,23 @@ namespace POS_C
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            // Code here
+            int sku;
+            string description;
+            decimal price;
+            int quantity;
 
-
-
-
-
-
+            try
+            {
+                sku = Int32.Parse(sKUTextBox.Text);
+                description = descriptionTextBox.Text;
+                price = Decimal.Parse(priceTextBox.Text);
+                quantity = Int32.Parse(quantityTextBox.Text);
+                this.inventoryTableAdapter.UpdateQuery(description, price, quantity, sku);
+            }
+            catch
+            {
+                MessageBox.Show(this, "Invalid Update Values", "Error");
+            }
 
             this.sKUTextBox.Focus();
             this.sKUTextBox.Enabled = true;
