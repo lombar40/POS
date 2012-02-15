@@ -12,6 +12,9 @@ namespace POS_C
 {
     public partial class editInventory : Form
     {
+        // Plays a sound when an error occurs
+        System.Media.SoundPlayer errorSound = new System.Media.SoundPlayer(@"C:\Windows\Media\chord.wav");
+
         public editInventory()
         {
             InitializeComponent();
@@ -34,7 +37,10 @@ namespace POS_C
                 returnValue = this.inventoryTableAdapter.FillBySKU(this.pOSDataSet.Inventory, sku);
                 switch (returnValue)
                 {
+                    // Returns an error and plays a sound when the
+                    // specified SKU doesn't exist.
                     case 0:
+                        errorSound.Play();
                         MessageBox.Show(this, "SKU not found", "Error");
                         break;
                     default:
@@ -51,6 +57,9 @@ namespace POS_C
             }
             catch
             {
+                // Returns an error and plays a sound when the user
+                // searches for a non-SKU query (ex. anything with letters/symbols/etc.)
+                errorSound.Play();
                 MessageBox.Show(this, "Invalid SKU", "Error");
             }
             
@@ -106,6 +115,11 @@ namespace POS_C
             this.inventoryBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.pOSDataSet);
 
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

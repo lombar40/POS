@@ -44,6 +44,7 @@
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.priceTextBox = new System.Windows.Forms.TextBox();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
+            this.closeButton = new System.Windows.Forms.Button();
             sKULabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             priceLabel = new System.Windows.Forms.Label();
@@ -174,11 +175,22 @@
             this.quantityTextBox.Size = new System.Drawing.Size(100, 20);
             this.quantityTextBox.TabIndex = 20;
             // 
+            // closeButton
+            // 
+            this.closeButton.Location = new System.Drawing.Point(399, 465);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 21;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
             // editInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 568);
+            this.Controls.Add(this.closeButton);
             this.Controls.Add(sKULabel);
             this.Controls.Add(this.sKUTextBox);
             this.Controls.Add(descriptionLabel);
@@ -216,6 +228,7 @@
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.TextBox priceTextBox;
         private System.Windows.Forms.TextBox quantityTextBox;
+        private System.Windows.Forms.Button closeButton;
 
 
     }
