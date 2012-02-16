@@ -11,9 +11,6 @@ namespace POS_C
 {
     public partial class inventoryScreen : Form
     {
-        // Plays a sound when an error occurs
-        System.Media.SoundPlayer errorSound = new System.Media.SoundPlayer(@"C:\Windows\Media\chord.wav");
-
         int checkedRadioBox;
         int queryReturnValue;
         public inventoryScreen()
@@ -34,6 +31,8 @@ namespace POS_C
 
             // Set initial radioBox value to 1
             checkedRadioBox = 1;
+
+            
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -73,7 +72,6 @@ namespace POS_C
                         break;
                     default:
                         // Error
-                        errorSound.Play();
                         this.queryLabel.Text = "Invalid Search Query";
                         break;
                 }
@@ -83,8 +81,7 @@ namespace POS_C
             }
             catch
             {
-                // Display error message and play sound on invalid input
-                errorSound.Play();
+                // Display error message on invalid input
                 this.queryLabel.Text = "Invalid Search Query";    
             }
 
