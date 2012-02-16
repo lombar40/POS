@@ -37,11 +37,11 @@
             this.addNewItemButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.sKUTextBox = new System.Windows.Forms.TextBox();
+            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pOSDataSet = new POS_C.POSDataSet();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.priceTextBox = new System.Windows.Forms.TextBox();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
-            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pOSDataSet = new POS_C.POSDataSet();
             this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
             this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
             sKULabel = new System.Windows.Forms.Label();
@@ -122,10 +122,20 @@
             // sKUTextBox
             // 
             this.sKUTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "SKU", true));
-            this.sKUTextBox.Location = new System.Drawing.Point(192, 247);
+            this.sKUTextBox.Location = new System.Drawing.Point(189, 247);
             this.sKUTextBox.Name = "sKUTextBox";
             this.sKUTextBox.Size = new System.Drawing.Size(66, 20);
             this.sKUTextBox.TabIndex = 0;
+            // 
+            // inventoryBindingSource
+            // 
+            this.inventoryBindingSource.DataMember = "Inventory";
+            this.inventoryBindingSource.DataSource = this.pOSDataSet;
+            // 
+            // pOSDataSet
+            // 
+            this.pOSDataSet.DataSetName = "POSDataSet";
+            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // descriptionTextBox
             // 
@@ -153,16 +163,6 @@
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(100, 20);
             this.quantityTextBox.TabIndex = 3;
-            // 
-            // inventoryBindingSource
-            // 
-            this.inventoryBindingSource.DataMember = "Inventory";
-            this.inventoryBindingSource.DataSource = this.pOSDataSet;
-            // 
-            // pOSDataSet
-            // 
-            this.pOSDataSet.DataSetName = "POSDataSet";
-            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // inventoryTableAdapter
             // 

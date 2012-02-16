@@ -19,15 +19,13 @@ namespace POS_C
 
         private void editInventory_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'pOSDataSet.Inventory' table. You can move, or remove it, as needed.
-            //this.inventoryTableAdapter.Fill(this.pOSDataSet.Inventory);
- 
+
         }
 
         private void retrieveItemButton_Click(object sender, EventArgs e)
         {
             int returnValue = 0;
-            int sku;
+            int sku=0;
             try
             {
                 sku = Int32.Parse(this.sKUTextBox.Text);
@@ -37,7 +35,7 @@ namespace POS_C
                     case 0:
                         MessageBox.Show(this, "SKU not found", "Error");
                         break;
-                    default:
+                    case 1:
                         this.descriptionTextBox.Focus();
                         this.sKUTextBox.Enabled = false;
                         this.descriptionTextBox.Enabled = true;
@@ -46,6 +44,9 @@ namespace POS_C
                         this.retrieveItemButton.Enabled = false;
                         this.addNewItemButton.Enabled = false;
                         this.saveButton.Enabled = true;
+                        break;
+                    default:
+                        MessageBox.Show(this, "Database Error", "Error");
                         break;
                 }
             }
@@ -85,18 +86,20 @@ namespace POS_C
 
             try
             {
-                sku = Int32.Parse(sKUTextBox.Text);
-                description = descriptionTextBox.Text;
-                price = Decimal.Parse(priceTextBox.Text);
-                quantity = Int32.Parse(quantityTextBox.Text);
+                sku = Int32.Parse(this.sKUTextBox.Text);
+                description = this.descriptionTextBox.Text;
+                price = Decimal.Parse(this.priceTextBox.Text);
+                quantity = Int32.Parse(this.quantityTextBox.Text);
                 this.inventoryTableAdapter.UpdateQuery(description, price, quantity, sku);
             }
             catch
             {
                 MessageBox.Show(this, "Invalid Update Values", "Error");
+                return;
             }
 
-            this.sKUTextBox.Focus();
+            // Clear text boxes and enable/disable buttons
+            this.inventoryTableAdapter.FillBySKU(this.pOSDataSet.Inventory, 9999);
             this.sKUTextBox.Enabled = true;
             this.descriptionTextBox.Enabled = false;
             this.priceTextBox.Enabled = false;
@@ -104,18 +107,8 @@ namespace POS_C
             this.retrieveItemButton.Enabled = true;
             this.addNewItemButton.Enabled = true;
             this.saveButton.Enabled = false;
-            this.sKUTextBox.Text = "";
-            this.descriptionTextBox.Text = "";
-            this.priceTextBox.Text = "";
-            this.quantityTextBox.Text = "";
-        }
-
-        private void inventoryBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.inventoryBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.pOSDataSet);
-
+            this.sKUTextBox.Focus();
+            
         }
     }
 }

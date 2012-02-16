@@ -31,6 +31,8 @@ namespace POS_C
 
             // Set initial radioBox value to 1
             checkedRadioBox = 1;
+
+            
         }
 
         private void searchButton_Click(object sender, EventArgs e)
