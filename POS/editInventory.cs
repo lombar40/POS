@@ -105,6 +105,7 @@ namespace POS_C
             }
             catch
             {
+                errorSound.Play();
                 MessageBox.Show(this, "Invalid Update Values", "Error");
                 return;
             }
@@ -120,6 +121,12 @@ namespace POS_C
             this.saveButton.Enabled = false;
             this.sKUTextBox.Focus();
             
+        }
+
+        // Close the form
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
