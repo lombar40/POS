@@ -44,6 +44,7 @@
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
             this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
+            this.closeButton = new System.Windows.Forms.Button();
             sKULabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             priceLabel = new System.Windows.Forms.Label();
@@ -55,7 +56,7 @@
             // sKULabel
             // 
             sKULabel.AutoSize = true;
-            sKULabel.Location = new System.Drawing.Point(189, 231);
+            sKULabel.Location = new System.Drawing.Point(144, 111);
             sKULabel.Name = "sKULabel";
             sKULabel.Size = new System.Drawing.Size(32, 13);
             sKULabel.TabIndex = 13;
@@ -64,7 +65,7 @@
             // descriptionLabel
             // 
             descriptionLabel.AutoSize = true;
-            descriptionLabel.Location = new System.Drawing.Point(261, 231);
+            descriptionLabel.Location = new System.Drawing.Point(216, 111);
             descriptionLabel.Name = "descriptionLabel";
             descriptionLabel.Size = new System.Drawing.Size(63, 13);
             descriptionLabel.TabIndex = 15;
@@ -73,7 +74,7 @@
             // priceLabel
             // 
             priceLabel.AutoSize = true;
-            priceLabel.Location = new System.Drawing.Point(515, 231);
+            priceLabel.Location = new System.Drawing.Point(470, 111);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(34, 13);
             priceLabel.TabIndex = 17;
@@ -82,7 +83,7 @@
             // quantityLabel
             // 
             quantityLabel.AutoSize = true;
-            quantityLabel.Location = new System.Drawing.Point(624, 231);
+            quantityLabel.Location = new System.Drawing.Point(579, 111);
             quantityLabel.Name = "quantityLabel";
             quantityLabel.Size = new System.Drawing.Size(49, 13);
             quantityLabel.TabIndex = 19;
@@ -90,7 +91,7 @@
             // 
             // retrieveItemButton
             // 
-            this.retrieveItemButton.Location = new System.Drawing.Point(299, 318);
+            this.retrieveItemButton.Location = new System.Drawing.Point(254, 198);
             this.retrieveItemButton.Name = "retrieveItemButton";
             this.retrieveItemButton.Size = new System.Drawing.Size(93, 23);
             this.retrieveItemButton.TabIndex = 4;
@@ -100,7 +101,7 @@
             // 
             // addNewItemButton
             // 
-            this.addNewItemButton.Location = new System.Drawing.Point(399, 318);
+            this.addNewItemButton.Location = new System.Drawing.Point(354, 198);
             this.addNewItemButton.Name = "addNewItemButton";
             this.addNewItemButton.Size = new System.Drawing.Size(85, 23);
             this.addNewItemButton.TabIndex = 5;
@@ -111,7 +112,7 @@
             // saveButton
             // 
             this.saveButton.Enabled = false;
-            this.saveButton.Location = new System.Drawing.Point(490, 318);
+            this.saveButton.Location = new System.Drawing.Point(445, 198);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 6;
@@ -122,7 +123,7 @@
             // sKUTextBox
             // 
             this.sKUTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "SKU", true));
-            this.sKUTextBox.Location = new System.Drawing.Point(189, 247);
+            this.sKUTextBox.Location = new System.Drawing.Point(144, 127);
             this.sKUTextBox.Name = "sKUTextBox";
             this.sKUTextBox.Size = new System.Drawing.Size(66, 20);
             this.sKUTextBox.TabIndex = 0;
@@ -141,7 +142,7 @@
             // 
             this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Description", true));
             this.descriptionTextBox.Enabled = false;
-            this.descriptionTextBox.Location = new System.Drawing.Point(264, 247);
+            this.descriptionTextBox.Location = new System.Drawing.Point(219, 127);
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(251, 20);
             this.descriptionTextBox.TabIndex = 1;
@@ -150,7 +151,7 @@
             // 
             this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Price", true));
             this.priceTextBox.Enabled = false;
-            this.priceTextBox.Location = new System.Drawing.Point(518, 247);
+            this.priceTextBox.Location = new System.Drawing.Point(473, 127);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(100, 20);
             this.priceTextBox.TabIndex = 2;
@@ -159,7 +160,7 @@
             // 
             this.quantityTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.inventoryBindingSource, "Quantity", true));
             this.quantityTextBox.Enabled = false;
-            this.quantityTextBox.Location = new System.Drawing.Point(627, 247);
+            this.quantityTextBox.Location = new System.Drawing.Point(582, 127);
             this.quantityTextBox.Name = "quantityTextBox";
             this.quantityTextBox.Size = new System.Drawing.Size(100, 20);
             this.quantityTextBox.TabIndex = 3;
@@ -174,11 +175,22 @@
             this.tableAdapterManager.InventoryTableAdapter = this.inventoryTableAdapter;
             this.tableAdapterManager.UpdateOrder = POS_C.POSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
+            // closeButton
+            // 
+            this.closeButton.Location = new System.Drawing.Point(354, 305);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 20;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
             // editInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(867, 568);
+            this.ClientSize = new System.Drawing.Size(790, 421);
+            this.Controls.Add(this.closeButton);
             this.Controls.Add(sKULabel);
             this.Controls.Add(this.sKUTextBox);
             this.Controls.Add(descriptionLabel);
@@ -194,6 +206,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "editInventory";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Inventory";
             this.Load += new System.EventHandler(this.editInventory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).EndInit();
@@ -216,6 +229,7 @@
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.TextBox priceTextBox;
         private System.Windows.Forms.TextBox quantityTextBox;
+        private System.Windows.Forms.Button closeButton;
 
 
     }

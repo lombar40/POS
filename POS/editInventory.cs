@@ -12,6 +12,9 @@ namespace POS_C
 {
     public partial class editInventory : Form
     {
+        // Plays a sound when an error occurs
+        System.Media.SoundPlayer errorSound = new System.Media.SoundPlayer(@"C:\Windows\Media\chord.wav");
+
         public editInventory()
         {
             InitializeComponent();
@@ -21,7 +24,6 @@ namespace POS_C
         {
 
         }
-
         private void retrieveItemButton_Click(object sender, EventArgs e)
         {
             int returnValue = 0;
@@ -33,6 +35,9 @@ namespace POS_C
                 switch (returnValue)
                 {
                     case 0:
+                        // Returns an error and plays a sound when the
+                        // specified SKU doesn't exist.
+                        errorSound.Play();
                         MessageBox.Show(this, "SKU not found", "Error");
                         break;
                     case 1:
@@ -46,12 +51,18 @@ namespace POS_C
                         this.saveButton.Enabled = true;
                         break;
                     default:
+                        // Returns an error and plays a sound when the user
+                        // searches for a non-SKU query (ex. anything with letters/symbols/etc.)
+                        errorSound.Play();
                         MessageBox.Show(this, "Database Error", "Error");
                         break;
                 }
             }
             catch
             {
+                // Returns an error and plays a sound when the user
+                // searches for a non-SKU query (ex. anything with letters/symbols/etc.)
+                errorSound.Play();
                 MessageBox.Show(this, "Invalid SKU", "Error");
             }
             
@@ -94,6 +105,7 @@ namespace POS_C
             }
             catch
             {
+                errorSound.Play();
                 MessageBox.Show(this, "Invalid Update Values", "Error");
                 return;
             }
@@ -109,6 +121,12 @@ namespace POS_C
             this.saveButton.Enabled = false;
             this.sKUTextBox.Focus();
             
+        }
+
+        // Close the form
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

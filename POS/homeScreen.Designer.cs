@@ -78,7 +78,7 @@
             // 
             this.exitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(297, 496);
+            this.exitButton.Location = new System.Drawing.Point(241, 485);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(122, 28);
             this.exitButton.TabIndex = 4;
@@ -91,7 +91,7 @@
             this.inventoryBox.Controls.Add(this.editInventoryButton);
             this.inventoryBox.Controls.Add(this.viewInventoryButton);
             this.inventoryBox.Font = new System.Drawing.Font("Segoe Script", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inventoryBox.Location = new System.Drawing.Point(220, 80);
+            this.inventoryBox.Location = new System.Drawing.Point(164, 69);
             this.inventoryBox.Name = "inventoryBox";
             this.inventoryBox.Size = new System.Drawing.Size(300, 200);
             this.inventoryBox.TabIndex = 5;
@@ -102,7 +102,7 @@
             // 
             this.transactionBox.Controls.Add(this.transactionButton);
             this.transactionBox.Font = new System.Drawing.Font("Segoe Script", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.transactionBox.Location = new System.Drawing.Point(175, 286);
+            this.transactionBox.Location = new System.Drawing.Point(119, 275);
             this.transactionBox.Name = "transactionBox";
             this.transactionBox.Size = new System.Drawing.Size(377, 142);
             this.transactionBox.TabIndex = 6;
@@ -114,7 +114,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.exitButton;
-            this.ClientSize = new System.Drawing.Size(790, 568);
+            this.ClientSize = new System.Drawing.Size(627, 568);
             this.Controls.Add(this.transactionBox);
             this.Controls.Add(this.inventoryBox);
             this.Controls.Add(this.exitButton);
