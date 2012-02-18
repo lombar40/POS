@@ -12,21 +12,21 @@ namespace POS_C
 {
     public partial class transactionsScreen : Form
     {
-        Transaction items = new Transaction(); // DUNNO IF NEED
+        Transaction transaction = new Transaction();
 
-        // Plays a sound when an error occurs
-        System.Media.SoundPlayer errorSound = new System.Media.SoundPlayer(@"C:\Windows\Media\chord.wav");
-       
         public transactionsScreen()
         {
             InitializeComponent();
         }
 
-        // Closes the Transactions form
-        private void closeTransactions_Click(object sender, EventArgs e)
+        private void transactionsScreen_Load(object sender, EventArgs e)
         {
-            Close();
+            inventoryDataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            inventoryDataGridView.Columns[2].DefaultCellStyle.Format = "c";        // currency format
+            inventoryTableAdapter.ClearBeforeFill = false;
+            
         }
+
 
         /**
          * The goal here is to add items into a transaction and display the sum
@@ -36,78 +36,98 @@ namespace POS_C
          **/
         private void addItem_Click(object sender, EventArgs e)
         {
+            int sku;
+            int quantity;
+            decimal price;
+            int returnValue;
             try
             {
-                //int SKU, quantity;
-                //SKU = Int32.Parse(this.skuBox.Text);
-                //quantity = Int32.Parse(this.quantityBox.Text);
-                //Transaction item = new Transaction(SKU, quantity);
-                Transaction item = new Transaction(Int32.Parse(this.skuBox.Text), Int32.Parse(this.quantityBox.Text));
+                sku = Int32.Parse(this.skuBox.Text);
+                price = (decimal)inventoryTableAdapter.GetPrice(sku);
+                returnValue = transaction.AddItem(sku, inventoryTableAdapter, pOSDataSet);
+                transaction.UpdateTotals(price, subtotalLabel, taxLabel, totalLabel);
+                
+                //quantity = (int)inventoryTableAdapter.GetQuantity(sku);
+                //price = (decimal)inventoryDataGridView.Rows[0].Cells[2].Value;
+                //testBox.Text = returnValue.ToString();
             }
             catch
             {
                 // Returns an error and plays a sound when the user
                 // searches for a non-SKU query (ex. anything with letters/symbols/etc.)
-                errorSound.Play();
-                MessageBox.Show(this, "Please input a valid SKU", "Error");
-                //totalBox.Text = Money.Display(); // Something like this
+                
             }
         }
 
+        
+
+        // Closes the Transactions form
+        private void closeTransactions_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+ 
     }
 
     public class Transaction
     {
         /*---------------METHODS--------------------*/
-        public Transaction(int inputSKU, int inputQuantity)
-        {
-            SKU = inputSKU;
-            quantity = inputQuantity;
-        }
-
-        // Default constructor; shouldn't be used.
+        // Default constructor
         public Transaction()
         {
-            SKU = 0;
-            description = "";
-            quantity = 0;
+            this.items = 0;
+            this.totals = new Money();
         }
 
         // Destructor
         ~Transaction()
         {
-            SKU = 0;
-            description = null;
-            quantity = 0;
+            
+        }
+
+        public int AddItem(int sku, POSDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter, POSDataSet pOSDataSet)
+        {
+            int returnValue = inventoryTableAdapter.FillBySKU(pOSDataSet.Inventory, sku);
+            if (returnValue != 0)
+                this.items++;
+            return returnValue;
+        }
+
+        public void UpdateTotals(decimal price, System.Windows.Forms.Label subtotalLabel, System.Windows.Forms.Label taxLabel, System.Windows.Forms.Label totalLabel)
+        {
+            totals.UpdateTotal(price);
+            totals.UpdateTotalLabels(subtotalLabel, taxLabel, totalLabel);
         }
         /*---------------END METHODS----------------*/
 
         /*---------------MEMBERS--------------------*/
-        public int SKU;
-        private string description; // Need to retrieve from database based on supplied SKU number
-        private int quantity;
-        public Money total; // The sum total of all the items.
+        private int items;
+        public Money totals;
     }
 
     public class Money
     {
         // Calculates the running total
-        public void Calculate()
+        public void UpdateTotal(decimal price)
         {
-
+            this.subtotal += price;
+            this.tax = taxRate * this.subtotal;
+            this.total = this.subtotal + this.tax;
         }
+
 
         // Displays the total to, ideally, totalBox.
         // totalBox can't be called from here though
-        public string Display()
+        public void UpdateTotalLabels(System.Windows.Forms.Label subtotalLabel, System.Windows.Forms.Label taxLabel, System.Windows.Forms.Label totalLabel)
         {
-            string output = ""; // Test
-        
-            return output;
+            subtotalLabel.Text = this.subtotal.ToString("c");
+            taxLabel.Text = this.tax.ToString("c");
+            totalLabel.Text = this.total.ToString("c");
         }
 
-        private int dollars;
-        private int cents;
-        public string yah = "HI";
+        private decimal subtotal;
+        private decimal tax;
+        private decimal total;
+        private static decimal taxRate = 0.081M;
     }
 }

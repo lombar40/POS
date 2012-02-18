@@ -12,9 +12,6 @@ namespace POS_C
 {
     public partial class editInventory : Form
     {
-        // Plays a sound when an error occurs
-        System.Media.SoundPlayer errorSound = new System.Media.SoundPlayer(@"C:\Windows\Media\chord.wav");
-
         public editInventory()
         {
             InitializeComponent();
@@ -26,107 +23,137 @@ namespace POS_C
         }
         private void retrieveItemButton_Click(object sender, EventArgs e)
         {
-            int returnValue = 0;
-            int sku=0;
+            int returnValue = 0;    // Storage of database query return value
+            int sku=0;              // Storage of SKU
+            
+            // Clear error labels
+            skuErrorLabel.Visible = false;
+            databaseErrorLabel.Visible = false;
+            queryErrorLabel.Visible = false;
+
+            // Try the parsing of SKU Text Box
             try
             {
-                sku = Int32.Parse(this.sKUTextBox.Text);
-                returnValue = this.inventoryTableAdapter.FillBySKU(this.pOSDataSet.Inventory, sku);
+                // Parse SKU Text Box to integer and query database for SKU
+                sku = Int32.Parse(sKUTextBox.Text);
+                returnValue = inventoryTableAdapter.FillBySKU(pOSDataSet.Inventory, sku);
+
+                // Check to see if SKU was found
                 switch (returnValue)
                 {
+                    // SKU not found
                     case 0:
-                        // Returns an error and plays a sound when the
-                        // specified SKU doesn't exist.
-                        errorSound.Play();
-                        MessageBox.Show(this, "SKU not found", "Error");
+                        skuErrorLabel.Text = "SKU not found!";
+                        skuErrorLabel.Visible = true;
                         break;
+                    // Valid SKU found
                     case 1:
-                        this.descriptionTextBox.Focus();
-                        this.sKUTextBox.Enabled = false;
-                        this.descriptionTextBox.Enabled = true;
-                        this.priceTextBox.Enabled = true;
-                        this.quantityTextBox.Enabled = true;
-                        this.retrieveItemButton.Enabled = false;
-                        this.addNewItemButton.Enabled = false;
-                        this.saveButton.Enabled = true;
+                        descriptionTextBox.Focus();
+                        sKUTextBox.Enabled = false;
+                        descriptionTextBox.Enabled = true;
+                        priceTextBox.Enabled = true;
+                        quantityTextBox.Enabled = true;
+                        retrieveItemButton.Enabled = false;
+                        addNewItemButton.Enabled = false;
+                        saveButton.Enabled = true;
                         break;
+                    // Database query error
                     default:
-                        // Returns an error and plays a sound when the user
-                        // searches for a non-SKU query (ex. anything with letters/symbols/etc.)
-                        errorSound.Play();
-                        MessageBox.Show(this, "Database Error", "Error");
+                        databaseErrorLabel.Visible = true;
                         break;
                 }
             }
+            // Catch errors when parsing SKU to an integer
             catch
             {
-                // Returns an error and plays a sound when the user
-                // searches for a non-SKU query (ex. anything with letters/symbols/etc.)
-                errorSound.Play();
-                MessageBox.Show(this, "Invalid SKU", "Error");
-            }
-            
-            
+                skuErrorLabel.Text = "Invalid SKU!";
+                skuErrorLabel.Visible = true;
+            }  
         }
 
         private void newItemButton_Click(object sender, EventArgs e)
         {
 
-            // Code here
+            // Clear error labels
+            skuErrorLabel.Visible = false;
+            databaseErrorLabel.Visible = false;
+            queryErrorLabel.Visible = false;
 
-
-
-
-            this.descriptionTextBox.Focus();
-            this.sKUTextBox.Enabled = false;
-            this.descriptionTextBox.Enabled = true;
-            this.priceTextBox.Enabled = true;
-            this.quantityTextBox.Enabled = true;
-            this.retrieveItemButton.Enabled = false;
-            this.addNewItemButton.Enabled = false;
-            this.saveButton.Enabled = true;
+            // Change button visibility and set focus.
+            descriptionTextBox.Focus();
+            sKUTextBox.Enabled = false;
+            descriptionTextBox.Enabled = true;
+            priceTextBox.Enabled = true;
+            quantityTextBox.Enabled = true;
+            retrieveItemButton.Enabled = false;
+            addNewItemButton.Enabled = false;
+            saveButton.Enabled = true;
         } 
         
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            int sku;
-            string description;
-            decimal price;
-            int quantity;
+            int sku;            // Storage of SKU
+            string description; // Storage of Description
+            decimal price;      // Storage of Price
+            int quantity;       // Storage of Quantity
 
+            // Clear error labels
+            skuErrorLabel.Visible = false;
+            databaseErrorLabel.Visible = false;
+            queryErrorLabel.Visible = false;
+
+            // Try parsing of the text boxes
             try
             {
-                sku = Int32.Parse(this.sKUTextBox.Text);
-                description = this.descriptionTextBox.Text;
-                price = Decimal.Parse(this.priceTextBox.Text);
-                quantity = Int32.Parse(this.quantityTextBox.Text);
-                this.inventoryTableAdapter.UpdateQuery(description, price, quantity, sku);
+                sku = Int32.Parse(sKUTextBox.Text);
+                description = descriptionTextBox.Text;
+                price = Decimal.Parse(priceTextBox.Text);
+                quantity = Int32.Parse(quantityTextBox.Text);
+                inventoryTableAdapter.UpdateQuery(description, price, quantity, sku);
             }
+            // Catch invalid data entry errors and return
             catch
             {
-                errorSound.Play();
-                MessageBox.Show(this, "Invalid Update Values", "Error");
+                queryErrorLabel.Visible = true;
                 return;
             }
 
-            // Clear text boxes and enable/disable buttons
-            this.inventoryTableAdapter.FillBySKU(this.pOSDataSet.Inventory, 9999);
-            this.sKUTextBox.Enabled = true;
-            this.descriptionTextBox.Enabled = false;
-            this.priceTextBox.Enabled = false;
-            this.quantityTextBox.Enabled = false;
-            this.retrieveItemButton.Enabled = true;
-            this.addNewItemButton.Enabled = true;
-            this.saveButton.Enabled = false;
-            this.sKUTextBox.Focus();
-            
+            // Change button/textbox visibility, set focus, and clear text boxes.
+            inventoryTableAdapter.FillBySKU(pOSDataSet.Inventory, 9999);
+            sKUTextBox.Enabled = true;
+            descriptionTextBox.Enabled = false;
+            priceTextBox.Enabled = false;
+            quantityTextBox.Enabled = false;
+            retrieveItemButton.Enabled = true;
+            addNewItemButton.Enabled = true;
+            saveButton.Enabled = false;
+            sKUTextBox.Focus();
         }
 
-        // Close the form
         private void closeButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // Close the form
+            Close();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            // Clear error labels
+            skuErrorLabel.Visible = false;
+            databaseErrorLabel.Visible = false;
+            queryErrorLabel.Visible = false;
+
+            // Change button/textbox visibility, set focus, and clear text boxes.
+            inventoryTableAdapter.FillBySKU(pOSDataSet.Inventory, 9999);
+            sKUTextBox.Enabled = true;
+            descriptionTextBox.Enabled = false;
+            priceTextBox.Enabled = false;
+            quantityTextBox.Enabled = false;
+            retrieveItemButton.Enabled = true;
+            addNewItemButton.Enabled = true;
+            saveButton.Enabled = false;
+            sKUTextBox.Focus();
         }
     }
 }
