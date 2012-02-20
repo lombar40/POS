@@ -11,11 +11,9 @@ namespace POS_C
 {
     public partial class inventoryScreen : Form
     {
-        // Plays a sound when an error occurs
-        System.Media.SoundPlayer errorSound = new System.Media.SoundPlayer(@"C:\Windows\Media\chord.wav");
-
         int checkedRadioBox;
         int queryReturnValue;
+
         public inventoryScreen()
         {
             InitializeComponent();
@@ -34,6 +32,14 @@ namespace POS_C
 
             // Set initial radioBox value to 1
             checkedRadioBox = 1;   
+        }
+
+        // Set focus to the search box and highlight any current text inside
+        private void FocusSearchBox1()
+        {
+            searchBox1.Focus();
+            searchBox1.SelectionStart = 0;
+            searchBox1.SelectionLength = searchBox1.TextLength;
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -73,7 +79,6 @@ namespace POS_C
                         break;
                     default:
                         // Error
-                        errorSound.Play();
                         queryLabel.Text = "Invalid Search Query";
                         break;
                 }
@@ -84,14 +89,11 @@ namespace POS_C
             catch
             {
                 // Display error message and play sound on invalid input
-                errorSound.Play();
                 queryLabel.Text = "Invalid Search Query";    
             }
 
             // Set focus to searchBox1
-            searchBox1.Focus();
-            searchBox1.SelectionStart = 0;
-            searchBox1.SelectionLength = searchBox1.TextLength;
+            FocusSearchBox1();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -121,9 +123,7 @@ namespace POS_C
             searchBox2.Visible = false;
 
             // Set focus to searchBox1
-            searchBox1.Focus();
-            searchBox1.SelectionStart = 0;
-            searchBox1.SelectionLength = searchBox1.TextLength;
+            FocusSearchBox1();
         }
 
         private void descriptionRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -135,9 +135,7 @@ namespace POS_C
             searchBox2.Visible = false;
 
             // Set focus to searchBox1
-            searchBox1.Focus();
-            searchBox1.SelectionStart = 0;
-            searchBox1.SelectionLength = searchBox1.TextLength;
+            FocusSearchBox1();
         }
 
         private void priceRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -149,9 +147,7 @@ namespace POS_C
             searchBox2.Visible = true;
 
             // Set focus to searchBox1
-            searchBox1.Focus();
-            searchBox1.SelectionStart = 0;
-            searchBox1.SelectionLength = searchBox1.TextLength;
+            FocusSearchBox1();
         }
 
         private void quantityRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -163,9 +159,7 @@ namespace POS_C
             searchBox2.Visible = true;
 
             // Set focus to searchBox1
-            searchBox1.Focus();
-            searchBox1.SelectionStart = 0;
-            searchBox1.SelectionLength = searchBox1.TextLength;
+            FocusSearchBox1();
         }
 
         // Close the form

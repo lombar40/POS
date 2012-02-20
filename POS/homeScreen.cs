@@ -26,7 +26,7 @@ namespace POS_C
         // Opens up the window to deal with transactions
         private void transactionButton_Click(object sender, EventArgs e)
         {
-            transactionsScreen window = new transactionsScreen();
+            transactionScreen window = new transactionScreen();
             window.ShowDialog();
         }
 

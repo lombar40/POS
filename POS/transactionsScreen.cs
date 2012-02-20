@@ -10,11 +10,11 @@ using System.Data.SqlClient;
 
 namespace POS_C
 {
-    public partial class transactionsScreen : Form
+    public partial class transactionScreen : Form
     {
         Transaction transaction = new Transaction();
 
-        public transactionsScreen()
+        public transactionScreen()
         {
             InitializeComponent();
         }
@@ -23,8 +23,29 @@ namespace POS_C
         {
             inventoryDataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             inventoryDataGridView.Columns[2].DefaultCellStyle.Format = "c";        // currency format
-            inventoryTableAdapter.ClearBeforeFill = false;
-            
+        }
+
+        // Closes the Transactions form
+        private void closeTransactions_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void finalizeButton_Click(object sender, EventArgs e)
+        {
+            decimal tendered;
+            skuErrorLabel.Visible = false;
+            tenderedErrorLabel.Visible = false;
+            try
+            {
+                tendered = Decimal.Parse(amountTenderedBox.Text);
+                transaction.finalize(tendered, this);
+            }
+
+            catch
+            {
+                tenderedErrorLabel.Visible = true;
+            }
         }
 
 
@@ -34,44 +55,69 @@ namespace POS_C
          * database needs to actually be in thus form, or if it can
          * simply be referenced.
          **/
-        private void addItem_Click(object sender, EventArgs e)
+        private void addItem(object sender, KeyPressEventArgs e)
         {
-            int sku;
-            int quantity;
-            decimal price;
-            int returnValue;
-            try
+            if (e.KeyChar == (char)Keys.Return)
             {
-                sku = Int32.Parse(this.skuBox.Text);
-                price = (decimal)inventoryTableAdapter.GetPrice(sku);
-                returnValue = transaction.AddItem(sku, inventoryTableAdapter, pOSDataSet);
-                transaction.UpdateTotals(price, subtotalLabel, taxLabel, totalLabel);
-                
-                //quantity = (int)inventoryTableAdapter.GetQuantity(sku);
-                //price = (decimal)inventoryDataGridView.Rows[0].Cells[2].Value;
-                //testBox.Text = returnValue.ToString();
-            }
-            catch
-            {
-                // Returns an error and plays a sound when the user
-                // searches for a non-SKU query (ex. anything with letters/symbols/etc.)
-                
+                int sku;
+                decimal price;
+                skuErrorLabel.Visible = false;
+                tenderedErrorLabel.Visible = false;
+                try
+                {
+                    sku = Int32.Parse(this.skuBox.Text);
+                    price = (decimal)inventoryTableAdapter.GetPrice(sku);
+                    totalItemsLabel.Text = transaction.AddItem(sku, this).ToString();
+                    //totalItemsLabel.Text = transaction.AddItem(sku, inventoryTableAdapter, pOSDataSet).ToString();
+                    transaction.UpdateTotals(price, subtotalLabel, taxLabel, totalLabel);
+                    e.Handled = true;
+                }
+                catch
+                {
+                    // Returns an error when the user searches for a 
+                    // non-SKU query (ex. anything with letters/symbols/etc.)
+                    skuErrorLabel.Visible = true;
+                }
+                skuBox.Focus();
+                skuBox.SelectionStart = 0;
+                skuBox.SelectionLength = skuBox.TextLength;
             }
         }
 
-        
-
-        // Closes the Transactions form
-        private void closeTransactions_Click(object sender, EventArgs e)
+        private void Tender_Enter(object sender, KeyPressEventArgs e)
         {
-            Close();
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                e.Handled = true;
+                decimal tendered;
+                skuErrorLabel.Visible = false;
+                tenderedErrorLabel.Visible = false;
+                try
+                {
+                    tendered = Decimal.Parse(amountTenderedBox.Text);
+                    transaction.finalize(tendered, this);
+                }
+
+                catch
+                {
+                    // Returns an error when the user puts in non digit characters
+                    tenderedErrorLabel.Visible = true;
+                }
+            }
         }
- 
+
+        private void newTransactionButton_Click(object sender, EventArgs e)
+        {
+            transaction = new Transaction();
+            transaction.ResetForm(this);
+        }
     }
 
     public class Transaction
     {
         /*---------------METHODS--------------------*/
+       
+        
         // Default constructor
         public Transaction()
         {
@@ -82,15 +128,36 @@ namespace POS_C
         // Destructor
         ~Transaction()
         {
-            
+
         }
 
-        public int AddItem(int sku, POSDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter, POSDataSet pOSDataSet)
+        public void ResetForm(transactionScreen form)
         {
-            int returnValue = inventoryTableAdapter.FillBySKU(pOSDataSet.Inventory, sku);
+            form.taxLabel.Text = "$0.00";
+            form.skuBox.ResetText();
+            form.totalLabel.Text = "$0.00";
+            form.subtotalLabel.Text = "$0.00";
+            form.changeLabel.ResetText();
+            form.amountTenderedBox.Enabled = true;
+            form.amountTenderedBox.ResetText();
+            form.totalItemsLabel.Text = "0";
+            form.changeTitleLabel.Visible = false;
+            form.skuErrorLabel.Visible = false;
+            form.tenderedErrorLabel.Visible = false;
+            form.skuBox.Enabled = true;
+            form.finalizeButton.Enabled = true;
+            form.pOSDataSet.Clear();
+            form.skuBox.Focus();
+            form.skuBox.SelectionStart = 0;
+            form.skuBox.SelectionLength = form.skuBox.TextLength;
+        }
+
+        public int AddItem(int sku, transactionScreen form)
+        {
+            int returnValue = form.inventoryTableAdapter.FillBySKU(form.pOSDataSet.Inventory, sku);
             if (returnValue != 0)
                 this.items++;
-            return returnValue;
+            return this.items;
         }
 
         public void UpdateTotals(decimal price, System.Windows.Forms.Label subtotalLabel, System.Windows.Forms.Label taxLabel, System.Windows.Forms.Label totalLabel)
@@ -98,11 +165,23 @@ namespace POS_C
             totals.UpdateTotal(price);
             totals.UpdateTotalLabels(subtotalLabel, taxLabel, totalLabel);
         }
-        /*---------------END METHODS----------------*/
+        public void finalize(decimal tendered, transactionScreen form)
+        {
+            decimal change; // The amount of change to be given
+            change = tendered - totals.total;
+            form.changeTitleLabel.Visible = true;
+            form.changeLabel.Text = change.ToString("c");
+            form.amountTenderedBox.Enabled = false;
+            form.finalizeButton.Enabled = false;
+            form.skuBox.Text = "";
+            form.skuBox.Enabled = false;
 
-        /*---------------MEMBERS--------------------*/
+            // ENTER DATABASE CHANGES HERE
+
+        }
+
         private int items;
-        public Money totals;
+        private Money totals;
     }
 
     public class Money
@@ -115,7 +194,6 @@ namespace POS_C
             this.total = this.subtotal + this.tax;
         }
 
-
         // Displays the total to, ideally, totalBox.
         // totalBox can't be called from here though
         public void UpdateTotalLabels(System.Windows.Forms.Label subtotalLabel, System.Windows.Forms.Label taxLabel, System.Windows.Forms.Label totalLabel)
@@ -125,9 +203,9 @@ namespace POS_C
             totalLabel.Text = this.total.ToString("c");
         }
 
-        private decimal subtotal;
-        private decimal tax;
-        private decimal total;
-        private static decimal taxRate = 0.081M;
+        private decimal subtotal;   // The amount due before tax
+        private decimal tax;        // The amount of tax; applied to the subtotal
+        public decimal total;       // The entire cost of the transaction
+        private static decimal taxRate = 0.081M; // Nevada sales tax rate
     }
 }
