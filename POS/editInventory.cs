@@ -21,15 +21,24 @@ namespace POS_C
         {
 
         }
+
+        /// <summary>
+        /// Clears all the error labels
+        /// </summary>
+        private void clearErrorLabels()
+        {
+            skuErrorLabel.Visible = false;
+            databaseErrorLabel.Visible = false;
+            queryErrorLabel.Visible = false;
+        }
+
         private void retrieveItemButton_Click(object sender, EventArgs e)
         {
             int returnValue = 0;    // Storage of database query return value
             int sku=0;              // Storage of SKU
             
             // Clear error labels
-            skuErrorLabel.Visible = false;
-            databaseErrorLabel.Visible = false;
-            queryErrorLabel.Visible = false;
+            clearErrorLabels();
 
             // Try the parsing of SKU Text Box
             try
@@ -75,9 +84,7 @@ namespace POS_C
         {
 
             // Clear error labels
-            skuErrorLabel.Visible = false;
-            databaseErrorLabel.Visible = false;
-            queryErrorLabel.Visible = false;
+            clearErrorLabels();
 
             // Change button visibility and set focus.
             descriptionTextBox.Focus();
@@ -99,9 +106,7 @@ namespace POS_C
             int quantity;       // Storage of Quantity
 
             // Clear error labels
-            skuErrorLabel.Visible = false;
-            databaseErrorLabel.Visible = false;
-            queryErrorLabel.Visible = false;
+            clearErrorLabels();
 
             // Try parsing of the text boxes
             try
@@ -120,7 +125,7 @@ namespace POS_C
             }
 
             // Change button/textbox visibility, set focus, and clear text boxes.
-            inventoryTableAdapter.FillBySKU(pOSDataSet.Inventory, 9999);
+            pOSDataSet.Clear();
             sKUTextBox.Enabled = true;
             descriptionTextBox.Enabled = false;
             priceTextBox.Enabled = false;
@@ -140,9 +145,7 @@ namespace POS_C
         private void cancelButton_Click(object sender, EventArgs e)
         {
             // Clear error labels
-            skuErrorLabel.Visible = false;
-            databaseErrorLabel.Visible = false;
-            queryErrorLabel.Visible = false;
+            clearErrorLabels();
 
             // Change button/textbox visibility, set focus, and clear text boxes.
             inventoryTableAdapter.FillBySKU(pOSDataSet.Inventory, 9999);
