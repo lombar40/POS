@@ -101,9 +101,9 @@ namespace POS_C
         private void resetButton_Click(object sender, EventArgs e)
         {
             // Clear labels and textboxes
-            queryLabel.Text = "";
-            searchBox1.Text = "";
-            searchBox2.Text = "";
+            queryLabel.ResetText();
+            searchBox1.ResetText();
+            searchBox2.ResetText();
 
             // Check the skuRadioButton
             skuRadioButton.Checked = true;

@@ -15,7 +15,7 @@ namespace POS_C
         {
             InitializeComponent();
             
-            // Sets up the handling of key input
+            // Sets up the handling of key input in the form.
             KeyPreview = true;
             KeyDown += new KeyEventHandler(homeScreen_KeyDown);
         }

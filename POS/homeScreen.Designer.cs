@@ -114,7 +114,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.exitButton;
-            this.ClientSize = new System.Drawing.Size(627, 568);
+            this.ClientSize = new System.Drawing.Size(630, 568);
             this.Controls.Add(this.transactionBox);
             this.Controls.Add(this.inventoryBox);
             this.Controls.Add(this.exitButton);

@@ -35,7 +35,7 @@ namespace POS_C
             this.resetButton = new System.Windows.Forms.Button();
             this.queryLabel = new System.Windows.Forms.Label();
             this.searchLabel1 = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.inventorySplitContainer = new System.Windows.Forms.SplitContainer();
             this.closeInventoryView = new System.Windows.Forms.Button();
             this.searchLabel2 = new System.Windows.Forms.Label();
             this.searchBox2 = new System.Windows.Forms.TextBox();
@@ -45,18 +45,18 @@ namespace POS_C
             this.descriptionRadioButton = new System.Windows.Forms.RadioButton();
             this.priceRadioButton = new System.Windows.Forms.RadioButton();
             this.inventoryDataGridView = new System.Windows.Forms.DataGridView();
-            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pOSDataSet = new POS_C.POSDataSet();
-            this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
-            this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.inventoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pOSDataSet = new POS_C.POSDataSet();
+            this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
+            this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
+            ((System.ComponentModel.ISupportInitialize)(this.inventorySplitContainer)).BeginInit();
+            this.inventorySplitContainer.Panel1.SuspendLayout();
+            this.inventorySplitContainer.Panel2.SuspendLayout();
+            this.inventorySplitContainer.SuspendLayout();
             this.radioBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).BeginInit();
@@ -109,31 +109,32 @@ namespace POS_C
             this.searchLabel1.TabIndex = 6;
             this.searchLabel1.Text = "SKU:";
             // 
-            // splitContainer1
+            // inventorySplitContainer
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
+            this.inventorySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventorySplitContainer.IsSplitterFixed = true;
+            this.inventorySplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.inventorySplitContainer.Name = "inventorySplitContainer";
             // 
-            // splitContainer1.Panel1
+            // inventorySplitContainer.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.closeInventoryView);
-            this.splitContainer1.Panel1.Controls.Add(this.searchLabel2);
-            this.splitContainer1.Panel1.Controls.Add(this.searchBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.radioBox);
-            this.splitContainer1.Panel1.Controls.Add(this.searchBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.searchLabel1);
-            this.splitContainer1.Panel1.Controls.Add(this.searchButton);
-            this.splitContainer1.Panel1.Controls.Add(this.queryLabel);
-            this.splitContainer1.Panel1.Controls.Add(this.resetButton);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.closeInventoryView);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.searchLabel2);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.searchBox2);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.radioBox);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.searchBox1);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.searchLabel1);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.searchButton);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.queryLabel);
+            this.inventorySplitContainer.Panel1.Controls.Add(this.resetButton);
             // 
-            // splitContainer1.Panel2
+            // inventorySplitContainer.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.inventoryDataGridView);
-            this.splitContainer1.Size = new System.Drawing.Size(790, 568);
-            this.splitContainer1.SplitterDistance = 206;
-            this.splitContainer1.TabIndex = 7;
-            this.splitContainer1.TabStop = false;
+            this.inventorySplitContainer.Panel2.Controls.Add(this.inventoryDataGridView);
+            this.inventorySplitContainer.Size = new System.Drawing.Size(790, 568);
+            this.inventorySplitContainer.SplitterDistance = 206;
+            this.inventorySplitContainer.TabIndex = 7;
+            this.inventorySplitContainer.TabStop = false;
             // 
             // closeInventoryView
             // 
@@ -247,26 +248,6 @@ namespace POS_C
             this.inventoryDataGridView.TabIndex = 0;
             this.inventoryDataGridView.TabStop = false;
             // 
-            // inventoryBindingSource
-            // 
-            this.inventoryBindingSource.DataMember = "Inventory";
-            this.inventoryBindingSource.DataSource = this.pOSDataSet;
-            // 
-            // pOSDataSet
-            // 
-            this.pOSDataSet.DataSetName = "POSDataSet";
-            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // inventoryTableAdapter
-            // 
-            this.inventoryTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.InventoryTableAdapter = this.inventoryTableAdapter;
-            this.tableAdapterManager.UpdateOrder = POS_C.POSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "SKU";
@@ -303,6 +284,26 @@ namespace POS_C
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn4.Width = 53;
             // 
+            // inventoryBindingSource
+            // 
+            this.inventoryBindingSource.DataMember = "Inventory";
+            this.inventoryBindingSource.DataSource = this.pOSDataSet;
+            // 
+            // pOSDataSet
+            // 
+            this.pOSDataSet.DataSetName = "POSDataSet";
+            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // inventoryTableAdapter
+            // 
+            this.inventoryTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.InventoryTableAdapter = this.inventoryTableAdapter;
+            this.tableAdapterManager.UpdateOrder = POS_C.POSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
             // inventoryScreen
             // 
             this.AcceptButton = this.searchButton;
@@ -310,7 +311,7 @@ namespace POS_C
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeInventoryView;
             this.ClientSize = new System.Drawing.Size(790, 568);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.inventorySplitContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -318,11 +319,11 @@ namespace POS_C
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory";
             this.Load += new System.EventHandler(this.inventoryScreen_Load);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.inventorySplitContainer.Panel1.ResumeLayout(false);
+            this.inventorySplitContainer.Panel1.PerformLayout();
+            this.inventorySplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.inventorySplitContainer)).EndInit();
+            this.inventorySplitContainer.ResumeLayout(false);
             this.radioBox.ResumeLayout(false);
             this.radioBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).EndInit();
@@ -339,7 +340,7 @@ namespace POS_C
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Label queryLabel;
         private System.Windows.Forms.Label searchLabel1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer inventorySplitContainer;
         private POSDataSet pOSDataSet;
         private System.Windows.Forms.BindingSource inventoryBindingSource;
         private POSDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;

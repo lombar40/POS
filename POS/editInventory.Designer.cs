@@ -49,12 +49,18 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.skuErrorLabel = new System.Windows.Forms.Label();
             this.databaseErrorLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.editInventorySplitContainer = new System.Windows.Forms.SplitContainer();
             sKULabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             priceLabel = new System.Windows.Forms.Label();
             quantityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.editInventorySplitContainer)).BeginInit();
+            this.editInventorySplitContainer.Panel2.SuspendLayout();
+            this.editInventorySplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // sKULabel
@@ -116,7 +122,7 @@
             // saveButton
             // 
             this.saveButton.Enabled = false;
-            this.saveButton.Location = new System.Drawing.Point(146, 188);
+            this.saveButton.Location = new System.Drawing.Point(3, 3);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(93, 23);
             this.saveButton.TabIndex = 6;
@@ -182,7 +188,7 @@
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(344, 188);
+            this.closeButton.Location = new System.Drawing.Point(201, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(93, 23);
             this.closeButton.TabIndex = 8;
@@ -194,7 +200,7 @@
             // 
             this.queryErrorLabel.AutoSize = true;
             this.queryErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.queryErrorLabel.Location = new System.Drawing.Point(221, 109);
+            this.queryErrorLabel.Location = new System.Drawing.Point(220, 0);
             this.queryErrorLabel.Name = "queryErrorLabel";
             this.queryErrorLabel.Size = new System.Drawing.Size(144, 65);
             this.queryErrorLabel.TabIndex = 21;
@@ -203,7 +209,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(245, 188);
+            this.cancelButton.Location = new System.Drawing.Point(102, 3);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(93, 23);
             this.cancelButton.TabIndex = 7;
@@ -226,12 +232,42 @@
             // 
             this.databaseErrorLabel.AutoSize = true;
             this.databaseErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.databaseErrorLabel.Location = new System.Drawing.Point(177, 109);
+            this.databaseErrorLabel.Location = new System.Drawing.Point(178, 58);
             this.databaseErrorLabel.Name = "databaseErrorLabel";
             this.databaseErrorLabel.Size = new System.Drawing.Size(239, 39);
             this.databaseErrorLabel.TabIndex = 24;
             this.databaseErrorLabel.Text = "Database Error!\r\n\r\nCheck data entry or check database connection.";
             this.databaseErrorLabel.Visible = false;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Controls.Add(this.saveButton);
+            this.flowLayoutPanel1.Controls.Add(this.cancelButton);
+            this.flowLayoutPanel1.Controls.Add(this.closeButton);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(145, 205);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(299, 31);
+            this.flowLayoutPanel1.TabIndex = 25;
+            // 
+            // editInventorySplitContainer
+            // 
+            this.editInventorySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editInventorySplitContainer.IsSplitterFixed = true;
+            this.editInventorySplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.editInventorySplitContainer.Name = "editInventorySplitContainer";
+            this.editInventorySplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // editInventorySplitContainer.Panel2
+            // 
+            this.editInventorySplitContainer.Panel2.Controls.Add(this.databaseErrorLabel);
+            this.editInventorySplitContainer.Panel2.Controls.Add(this.queryErrorLabel);
+            this.editInventorySplitContainer.Size = new System.Drawing.Size(590, 248);
+            this.editInventorySplitContainer.SplitterDistance = 101;
+            this.editInventorySplitContainer.TabIndex = 26;
             // 
             // editInventory
             // 
@@ -239,12 +275,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(579, 223);
-            this.Controls.Add(this.databaseErrorLabel);
+            this.ClientSize = new System.Drawing.Size(590, 248);
             this.Controls.Add(this.skuErrorLabel);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.queryErrorLabel);
-            this.Controls.Add(this.closeButton);
             this.Controls.Add(sKULabel);
             this.Controls.Add(this.sKUTextBox);
             this.Controls.Add(descriptionLabel);
@@ -253,9 +285,10 @@
             this.Controls.Add(this.priceTextBox);
             this.Controls.Add(quantityLabel);
             this.Controls.Add(this.quantityTextBox);
-            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.addNewItemButton);
             this.Controls.Add(this.retrieveItemButton);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.editInventorySplitContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -264,6 +297,11 @@
             this.Text = "Edit Inventory";
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.editInventorySplitContainer.Panel2.ResumeLayout(false);
+            this.editInventorySplitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.editInventorySplitContainer)).EndInit();
+            this.editInventorySplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,6 +325,8 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label skuErrorLabel;
         private System.Windows.Forms.Label databaseErrorLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.SplitContainer editInventorySplitContainer;
 
 
     }
