@@ -77,13 +77,13 @@
             this.closeTransactions.Name = "closeTransactions";
             this.closeTransactions.Size = new System.Drawing.Size(75, 23);
             this.closeTransactions.TabIndex = 5;
-            this.closeTransactions.Text = "Close";
+            this.closeTransactions.Text = "Close [ESC]";
             this.closeTransactions.UseVisualStyleBackColor = true;
             this.closeTransactions.Click += new System.EventHandler(this.closeTransactions_Click);
             // 
             // skuBox
             // 
-            this.skuBox.Location = new System.Drawing.Point(12, 25);
+            this.skuBox.Location = new System.Drawing.Point(21, 25);
             this.skuBox.Name = "skuBox";
             this.skuBox.Size = new System.Drawing.Size(100, 20);
             this.skuBox.TabIndex = 1;
@@ -92,7 +92,7 @@
             // skuLabel
             // 
             this.skuLabel.AutoSize = true;
-            this.skuLabel.Location = new System.Drawing.Point(9, 6);
+            this.skuLabel.Location = new System.Drawing.Point(18, 6);
             this.skuLabel.Name = "skuLabel";
             this.skuLabel.Size = new System.Drawing.Size(32, 13);
             this.skuLabel.TabIndex = 4;
@@ -168,7 +168,7 @@
             // subtotalTitleLabel
             // 
             this.subtotalTitleLabel.AutoSize = true;
-            this.subtotalTitleLabel.Location = new System.Drawing.Point(20, 76);
+            this.subtotalTitleLabel.Location = new System.Drawing.Point(20, 58);
             this.subtotalTitleLabel.Name = "subtotalTitleLabel";
             this.subtotalTitleLabel.Size = new System.Drawing.Size(62, 15);
             this.subtotalTitleLabel.TabIndex = 7;
@@ -177,7 +177,7 @@
             // taxTitleLabel
             // 
             this.taxTitleLabel.AutoSize = true;
-            this.taxTitleLabel.Location = new System.Drawing.Point(20, 112);
+            this.taxTitleLabel.Location = new System.Drawing.Point(20, 94);
             this.taxTitleLabel.Name = "taxTitleLabel";
             this.taxTitleLabel.Size = new System.Drawing.Size(30, 15);
             this.taxTitleLabel.TabIndex = 8;
@@ -186,7 +186,7 @@
             // subtotalLabel
             // 
             this.subtotalLabel.AutoSize = true;
-            this.subtotalLabel.Location = new System.Drawing.Point(20, 89);
+            this.subtotalLabel.Location = new System.Drawing.Point(20, 71);
             this.subtotalLabel.Name = "subtotalLabel";
             this.subtotalLabel.Size = new System.Drawing.Size(38, 15);
             this.subtotalLabel.TabIndex = 9;
@@ -196,7 +196,7 @@
             // 
             this.totalTitleLabel.AutoSize = true;
             this.totalTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalTitleLabel.Location = new System.Drawing.Point(20, 149);
+            this.totalTitleLabel.Location = new System.Drawing.Point(20, 131);
             this.totalTitleLabel.Name = "totalTitleLabel";
             this.totalTitleLabel.Size = new System.Drawing.Size(45, 18);
             this.totalTitleLabel.TabIndex = 10;
@@ -206,7 +206,7 @@
             // 
             this.totalLabel.AutoSize = true;
             this.totalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalLabel.Location = new System.Drawing.Point(20, 166);
+            this.totalLabel.Location = new System.Drawing.Point(20, 148);
             this.totalLabel.Name = "totalLabel";
             this.totalLabel.Size = new System.Drawing.Size(55, 22);
             this.totalLabel.TabIndex = 11;
@@ -215,7 +215,7 @@
             // taxLabel
             // 
             this.taxLabel.AutoSize = true;
-            this.taxLabel.Location = new System.Drawing.Point(20, 125);
+            this.taxLabel.Location = new System.Drawing.Point(20, 107);
             this.taxLabel.Name = "taxLabel";
             this.taxLabel.Size = new System.Drawing.Size(38, 15);
             this.taxLabel.TabIndex = 12;
@@ -244,7 +244,7 @@
             // totalItemsTitleLabel
             // 
             this.totalItemsTitleLabel.AutoSize = true;
-            this.totalItemsTitleLabel.Location = new System.Drawing.Point(20, 41);
+            this.totalItemsTitleLabel.Location = new System.Drawing.Point(20, 23);
             this.totalItemsTitleLabel.Name = "totalItemsTitleLabel";
             this.totalItemsTitleLabel.Size = new System.Drawing.Size(70, 15);
             this.totalItemsTitleLabel.TabIndex = 16;
@@ -253,7 +253,7 @@
             // totalItemsLabel
             // 
             this.totalItemsLabel.AutoSize = true;
-            this.totalItemsLabel.Location = new System.Drawing.Point(21, 54);
+            this.totalItemsLabel.Location = new System.Drawing.Point(21, 36);
             this.totalItemsLabel.Name = "totalItemsLabel";
             this.totalItemsLabel.Size = new System.Drawing.Size(14, 15);
             this.totalItemsLabel.TabIndex = 17;
@@ -262,7 +262,7 @@
             // tenderedLabel
             // 
             this.tenderedLabel.AutoSize = true;
-            this.tenderedLabel.Location = new System.Drawing.Point(12, 296);
+            this.tenderedLabel.Location = new System.Drawing.Point(20, 296);
             this.tenderedLabel.Name = "tenderedLabel";
             this.tenderedLabel.Size = new System.Drawing.Size(91, 13);
             this.tenderedLabel.TabIndex = 18;
@@ -270,7 +270,7 @@
             // 
             // amountTenderedBox
             // 
-            this.amountTenderedBox.Location = new System.Drawing.Point(12, 312);
+            this.amountTenderedBox.Location = new System.Drawing.Point(20, 312);
             this.amountTenderedBox.Name = "amountTenderedBox";
             this.amountTenderedBox.Size = new System.Drawing.Size(100, 20);
             this.amountTenderedBox.TabIndex = 2;
@@ -278,11 +278,12 @@
             // 
             // finalizeButton
             // 
+            this.finalizeButton.Enabled = false;
             this.finalizeButton.Location = new System.Drawing.Point(12, 450);
             this.finalizeButton.Name = "finalizeButton";
-            this.finalizeButton.Size = new System.Drawing.Size(106, 23);
+            this.finalizeButton.Size = new System.Drawing.Size(121, 23);
             this.finalizeButton.TabIndex = 3;
-            this.finalizeButton.Text = "Finalize";
+            this.finalizeButton.Text = "Finalize [F5]";
             this.finalizeButton.UseVisualStyleBackColor = true;
             this.finalizeButton.Click += new System.EventHandler(this.finalizeButton_Click);
             // 
@@ -290,9 +291,9 @@
             // 
             this.newTransactionButton.Location = new System.Drawing.Point(12, 479);
             this.newTransactionButton.Name = "newTransactionButton";
-            this.newTransactionButton.Size = new System.Drawing.Size(106, 23);
+            this.newTransactionButton.Size = new System.Drawing.Size(121, 23);
             this.newTransactionButton.TabIndex = 4;
-            this.newTransactionButton.Text = "New Transaction";
+            this.newTransactionButton.Text = "New Transaction [F3]";
             this.newTransactionButton.UseVisualStyleBackColor = true;
             this.newTransactionButton.Click += new System.EventHandler(this.newTransactionButton_Click);
             // 
@@ -300,7 +301,7 @@
             // 
             this.skuErrorLabel.AutoSize = true;
             this.skuErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.skuErrorLabel.Location = new System.Drawing.Point(12, 48);
+            this.skuErrorLabel.Location = new System.Drawing.Point(32, 48);
             this.skuErrorLabel.Name = "skuErrorLabel";
             this.skuErrorLabel.Size = new System.Drawing.Size(77, 13);
             this.skuErrorLabel.TabIndex = 21;
@@ -331,10 +332,10 @@
             this.currentTransactionGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currentTransactionGroupBox.Location = new System.Drawing.Point(12, 81);
             this.currentTransactionGroupBox.Name = "currentTransactionGroupBox";
-            this.currentTransactionGroupBox.Size = new System.Drawing.Size(115, 201);
+            this.currentTransactionGroupBox.Size = new System.Drawing.Size(115, 183);
             this.currentTransactionGroupBox.TabIndex = 23;
             this.currentTransactionGroupBox.TabStop = false;
-            this.currentTransactionGroupBox.Text = "Current Transaction";
+            this.currentTransactionGroupBox.Text = "Totals";
             // 
             // transactionSplitContainer
             // 
@@ -409,7 +410,6 @@
 
         private System.Windows.Forms.Button closeTransactions;
         private System.Windows.Forms.Label skuLabel;
-        private System.Windows.Forms.DataGridView inventoryDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -437,5 +437,6 @@
         private System.Windows.Forms.GroupBox currentTransactionGroupBox;
         private System.Windows.Forms.SplitContainer transactionSplitContainer;
         private System.Windows.Forms.Panel closePanel;
+        public System.Windows.Forms.DataGridView inventoryDataGridView;
     }
 }

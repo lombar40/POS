@@ -11,12 +11,16 @@ namespace POS_C
 {
     public partial class inventoryScreen : Form
     {
-        int checkedRadioBox;
-        int queryReturnValue;
+        int checkedRadioBox;        // Stores radiobox checked status
+        int queryReturnValue;       // Stores return value of search queries
 
         public inventoryScreen()
         {
             InitializeComponent();
+
+            // Sets up the handling of key input in the form.
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(inventoryScreen_KeyDown);
         }
 
         private void inventoryScreen_Load(object sender, EventArgs e)
@@ -170,6 +174,37 @@ namespace POS_C
         private void closeInventoryView_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void editInventoryButton_Click(object sender, EventArgs e)
+        {
+            // Reset datatable to display all inventory items
+            queryReturnValue = inventoryTableAdapter.Fill(pOSDataSet.Inventory);
+            queryLabel.Text = queryReturnValue + " item(s) found";
+
+            // Call editInventory window
+            editInventory window = new editInventory(this);
+            window.ShowDialog();
+
+            // Reset datatable to display all inventory items upon return from editInventory
+            queryReturnValue = inventoryTableAdapter.Fill(pOSDataSet.Inventory);
+            queryLabel.Text = queryReturnValue + " item(s) found";
+        }
+
+        private void inventoryScreen_KeyDown(object sender, KeyEventArgs key)
+        {
+            switch (key.KeyCode)
+            {
+                case Keys.F1:
+                    editInventoryButton.PerformClick();
+                    break;
+                case Keys.F3:
+                    resetButton.PerformClick();
+                    break;
+                case Keys.F5:
+                    searchButton.PerformClick();
+                    break;
+            }
         }
     }
 }

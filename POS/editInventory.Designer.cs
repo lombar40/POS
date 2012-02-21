@@ -101,11 +101,11 @@
             // 
             // retrieveItemButton
             // 
-            this.retrieveItemButton.Location = new System.Drawing.Point(192, 68);
+            this.retrieveItemButton.Location = new System.Drawing.Point(181, 68);
             this.retrieveItemButton.Name = "retrieveItemButton";
-            this.retrieveItemButton.Size = new System.Drawing.Size(93, 23);
+            this.retrieveItemButton.Size = new System.Drawing.Size(104, 23);
             this.retrieveItemButton.TabIndex = 4;
-            this.retrieveItemButton.Text = "Retrieve Item";
+            this.retrieveItemButton.Text = "Retrieve Item [F1]";
             this.retrieveItemButton.UseVisualStyleBackColor = true;
             this.retrieveItemButton.Click += new System.EventHandler(this.retrieveItemButton_Click);
             // 
@@ -113,9 +113,9 @@
             // 
             this.addNewItemButton.Location = new System.Drawing.Point(291, 68);
             this.addNewItemButton.Name = "addNewItemButton";
-            this.addNewItemButton.Size = new System.Drawing.Size(93, 23);
+            this.addNewItemButton.Size = new System.Drawing.Size(104, 23);
             this.addNewItemButton.TabIndex = 5;
-            this.addNewItemButton.Text = "Add New Item";
+            this.addNewItemButton.Text = "Add New Item [F2]";
             this.addNewItemButton.UseVisualStyleBackColor = true;
             this.addNewItemButton.Click += new System.EventHandler(this.newItemButton_Click);
             // 
@@ -126,7 +126,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(93, 23);
             this.saveButton.TabIndex = 6;
-            this.saveButton.Text = "Save";
+            this.saveButton.Text = "Save [F5]";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -192,7 +192,7 @@
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(93, 23);
             this.closeButton.TabIndex = 8;
-            this.closeButton.Text = "Close";
+            this.closeButton.Text = "Close [ESC]";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
@@ -213,7 +213,7 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(93, 23);
             this.cancelButton.TabIndex = 7;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "Cancel [F3]";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 

@@ -17,26 +17,47 @@ namespace POS_C
         public transactionScreen()
         {
             InitializeComponent();
+
+            // Sets up the handling of key input in the form.
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(transactionScreen_KeyDown);
         }
 
         private void transactionsScreen_Load(object sender, EventArgs e)
         {
+            // Set DataGridView properties upon load
             inventoryDataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             inventoryDataGridView.Columns[2].DefaultCellStyle.Format = "c";        // currency format
         }
 
+        // Handle key presses on the form
+        private void transactionScreen_KeyDown(object sender, KeyEventArgs key)
+        {
+            switch (key.KeyCode)
+            {
+                case Keys.F3:
+                    newTransactionButton.PerformClick();
+                    break;
+                case Keys.F5:
+                    finalizeButton.PerformClick();
+                    break;
+            }
+        }
+        
         // Closes the Transactions form
         private void closeTransactions_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        // Perform the appropriate actions when the Finalize button is clicked.
+        // Finalize the transaction
         private void finalizeButton_Click(object sender, EventArgs e)
         {
             decimal tendered;
             skuErrorLabel.Visible = false;
             tenderedErrorLabel.Visible = false;
+
+
             try
             {
                 tendered = Decimal.Parse(amountTenderedBox.Text);
@@ -44,18 +65,13 @@ namespace POS_C
             }
             catch
             {
-                // Display the error label when an error is caught.
+                // Displays the tendered error label when a tender error is caught.
                 tenderedErrorLabel.Visible = true;
+                amountTenderedBox.Focus();
+                amountTenderedBox.SelectionStart = 0;
+                amountTenderedBox.SelectionLength = amountTenderedBox.TextLength;
             }
         }
-
-
-        /**
-         * The goal here is to add items into a transaction and display the sum
-         * total of all the items. I don't know whether or not the
-         * database needs to actually be in this form, or if it can
-         * simply be referenced.
-         **/
 
         // Hitting the Return/Enter key when in the SKU textbox.
         private void addItem_keyPress(object sender, KeyPressEventArgs e)
@@ -71,16 +87,19 @@ namespace POS_C
                     sku = Int32.Parse(this.skuBox.Text);
                     price = (decimal)inventoryTableAdapter.GetPrice(sku);
                     totalItemsLabel.Text = transaction.AddItem(sku, this).ToString();
-                    //totalItemsLabel.Text = transaction.AddItem(sku, inventoryTableAdapter, pOSDataSet).ToString();
-                    transaction.UpdateTotals(price, subtotalLabel, taxLabel, totalLabel);
+                    transaction.UpdateTotals(price, this);
+                    if (Int32.Parse(totalItemsLabel.Text) == 1)
+                        finalizeButton.Enabled = true;
                     e.Handled = true;
                 }
                 catch
                 {
-                    // Returns an error when the user searches for a 
+                    // Displays an error when the user searches for a 
                     // non-SKU query (ex. anything with letters/symbols/etc.)
                     skuErrorLabel.Visible = true;
                 }
+
+                // Highlight text in skuBox
                 skuBox.Focus();
                 skuBox.SelectionStart = 0;
                 skuBox.SelectionLength = skuBox.TextLength;
@@ -93,19 +112,7 @@ namespace POS_C
             if (e.KeyChar == (char)Keys.Return)
             {
                 e.Handled = true;
-                decimal tendered;
-                skuErrorLabel.Visible = false;
-                tenderedErrorLabel.Visible = false;
-                try
-                {
-                    tendered = Decimal.Parse(amountTenderedBox.Text);
-                    transaction.finalize(tendered, this);
-                }
-                catch
-                {
-                    // Returns an error when the user puts in non digit characters
-                    tenderedErrorLabel.Visible = true;
-                }
+                finalizeButton.PerformClick();
             }
         }
 
@@ -113,71 +120,64 @@ namespace POS_C
         private void newTransactionButton_Click(object sender, EventArgs e)
         {
             transaction = new Transaction();
-            transaction.ResetForm(this);
+            resetForm();
+        }
+
+        // Resets the form.
+        private void resetForm()
+        {
+            finalizeButton.Enabled = false;
+            taxLabel.Text = "$0.00";
+            skuBox.ResetText();
+            totalLabel.Text = "$0.00";
+            subtotalLabel.Text = "$0.00";
+            changeLabel.ResetText();
+            amountTenderedBox.Enabled = true;
+            amountTenderedBox.ResetText();
+            totalItemsLabel.Text = "0";
+            changeTitleLabel.Visible = false;
+            skuErrorLabel.Visible = false;
+            tenderedErrorLabel.Visible = false;
+            skuBox.Enabled = true;
+            pOSDataSet.Clear();
+            skuBox.Focus();
+            skuBox.SelectionStart = 0;
+            skuBox.SelectionLength = skuBox.TextLength;
         }
     }
 
     public class Transaction
     {
-        /*---------------METHODS--------------------*/
-       
-        
         // Default constructor
         public Transaction()
         {
-            this.items = 0;
+            this.numOfItems = 0;
             this.totals = new Money();
         }
-
-        // Destructor
-        ~Transaction()
-        {
-
-        }
-
-        // Resets the form.
-        public void ResetForm(transactionScreen form)
-        {
-            form.taxLabel.Text = "$0.00";
-            form.skuBox.ResetText();
-            form.totalLabel.Text = "$0.00";
-            form.subtotalLabel.Text = "$0.00";
-            form.changeLabel.ResetText();
-            form.amountTenderedBox.Enabled = true;
-            form.amountTenderedBox.ResetText();
-            form.totalItemsLabel.Text = "0";
-            form.changeTitleLabel.Visible = false;
-            form.skuErrorLabel.Visible = false;
-            form.tenderedErrorLabel.Visible = false;
-            form.skuBox.Enabled = true;
-            form.finalizeButton.Enabled = true;
-            form.pOSDataSet.Clear();
-            form.skuBox.Focus();
-            form.skuBox.SelectionStart = 0;
-            form.skuBox.SelectionLength = form.skuBox.TextLength;
-        }
-
-        // Counts the total number of items in the current transaction.
+        
+        // Adds items to the transaction and increases the item count
         public int AddItem(int sku, transactionScreen form)
         {
             int returnValue = form.inventoryTableAdapter.FillBySKU(form.pOSDataSet.Inventory, sku);
             if (returnValue != 0)
-                this.items++;
-            return this.items;
+                this.numOfItems++;
+            return this.numOfItems;
         }
 
         // Updates the total and the labels during the transaction.
-        public void UpdateTotals(decimal price, System.Windows.Forms.Label subtotalLabel, System.Windows.Forms.Label taxLabel, System.Windows.Forms.Label totalLabel)
+        public void UpdateTotals(decimal price, transactionScreen form)
         {
             totals.UpdateTotal(price);
-            totals.UpdateTotalLabels(subtotalLabel, taxLabel, totalLabel);
+            totals.UpdateTotalLabels(form);
         }
 
         // Calculates the transaction and displays the amount of change.
         public void finalize(decimal tendered, transactionScreen form)
         {
-            decimal change; // The amount of change to be given
+            decimal change;      // The amount of change to be given
             change = tendered - totals.total;
+            if (change < 0.00M)
+                throw new System.ArgumentException("Invalid Tendered Ammount");
             form.changeTitleLabel.Visible = true;
             form.changeLabel.Text = change.ToString("c");
             form.amountTenderedBox.Enabled = false;
@@ -185,17 +185,28 @@ namespace POS_C
             form.skuBox.ResetText();
             form.skuBox.Enabled = false;
 
-            // ENTER DATABASE CHANGES HERE
-
+            // Decrement quantities in database
+            for (int i = 0; i < numOfItems; i++)
+            {
+                form.inventoryTableAdapter.DecreaseQuantity((int)form.inventoryDataGridView.Rows[i].Cells[0].Value);
+            }
         }
 
-        private int items;
-        private Money totals;
+        private int numOfItems;      // Store the number of items in the transaction
+        private Money totals;   // Stores totals of the transaction
     }
 
     public class Money
     {
-        // Calculates the running total
+        // Default constructor
+        public Money()
+        {
+            this.subtotal = 0.00M;
+            this.tax = 0.00M;
+            this.total = 0.00M;
+        }
+
+        // Calculates the running totals
         public void UpdateTotal(decimal price)
         {
             this.subtotal += price;
@@ -203,13 +214,12 @@ namespace POS_C
             this.total = this.subtotal + this.tax;
         }
 
-        // Displays the total to, ideally, totalBox.
-        // totalBox can't be called from here though
-        public void UpdateTotalLabels(System.Windows.Forms.Label subtotalLabel, System.Windows.Forms.Label taxLabel, System.Windows.Forms.Label totalLabel)
+        // Updates total labels
+        public void UpdateTotalLabels(transactionScreen form)
         {
-            subtotalLabel.Text = this.subtotal.ToString("c");
-            taxLabel.Text = this.tax.ToString("c");
-            totalLabel.Text = this.total.ToString("c");
+            form.subtotalLabel.Text = this.subtotal.ToString("c");
+            form.taxLabel.Text = this.tax.ToString("c");
+            form.totalLabel.Text = this.total.ToString("c");
         }
 
         private decimal subtotal;                   // The amount due before tax

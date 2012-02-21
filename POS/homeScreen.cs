@@ -32,9 +32,6 @@ namespace POS_C
                     viewInventoryButton.PerformClick();
                     break;
                 case Keys.F2:
-                    editInventoryButton.PerformClick();
-                    break;
-                case Keys.F3:
                     transactionButton.PerformClick();
                     break;
             }
@@ -62,8 +59,8 @@ namespace POS_C
         private void editInventoryButton_Click(object sender, EventArgs e)
         {
             Hide();
-            editInventory window = new editInventory();
-            window.ShowDialog();
+            //editInventory window = new editInventory(this);
+            //window.ShowDialog();
             Show();
         }
 

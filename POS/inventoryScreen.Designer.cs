@@ -36,6 +36,7 @@ namespace POS_C
             this.queryLabel = new System.Windows.Forms.Label();
             this.searchLabel1 = new System.Windows.Forms.Label();
             this.inventorySplitContainer = new System.Windows.Forms.SplitContainer();
+            this.editInventoryButton = new System.Windows.Forms.Button();
             this.closeInventoryView = new System.Windows.Forms.Button();
             this.searchLabel2 = new System.Windows.Forms.Label();
             this.searchBox2 = new System.Windows.Forms.TextBox();
@@ -65,11 +66,11 @@ namespace POS_C
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(61, 415);
+            this.searchButton.Location = new System.Drawing.Point(51, 384);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.Size = new System.Drawing.Size(109, 23);
             this.searchButton.TabIndex = 4;
-            this.searchButton.Text = "Search";
+            this.searchButton.Text = "Search [F5]";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
@@ -82,11 +83,11 @@ namespace POS_C
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(61, 444);
+            this.resetButton.Location = new System.Drawing.Point(51, 413);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(75, 23);
+            this.resetButton.Size = new System.Drawing.Size(109, 23);
             this.resetButton.TabIndex = 5;
-            this.resetButton.Text = "Reset";
+            this.resetButton.Text = "Reset [F3]";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
@@ -94,7 +95,7 @@ namespace POS_C
             // 
             this.queryLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.queryLabel.ForeColor = System.Drawing.Color.Red;
-            this.queryLabel.Location = new System.Drawing.Point(40, 402);
+            this.queryLabel.Location = new System.Drawing.Point(45, 368);
             this.queryLabel.Name = "queryLabel";
             this.queryLabel.Size = new System.Drawing.Size(121, 13);
             this.queryLabel.TabIndex = 5;
@@ -118,6 +119,7 @@ namespace POS_C
             // 
             // inventorySplitContainer.Panel1
             // 
+            this.inventorySplitContainer.Panel1.Controls.Add(this.editInventoryButton);
             this.inventorySplitContainer.Panel1.Controls.Add(this.closeInventoryView);
             this.inventorySplitContainer.Panel1.Controls.Add(this.searchLabel2);
             this.inventorySplitContainer.Panel1.Controls.Add(this.searchBox2);
@@ -136,14 +138,24 @@ namespace POS_C
             this.inventorySplitContainer.TabIndex = 7;
             this.inventorySplitContainer.TabStop = false;
             // 
+            // editInventoryButton
+            // 
+            this.editInventoryButton.Location = new System.Drawing.Point(51, 301);
+            this.editInventoryButton.Name = "editInventoryButton";
+            this.editInventoryButton.Size = new System.Drawing.Size(109, 23);
+            this.editInventoryButton.TabIndex = 12;
+            this.editInventoryButton.Text = "Edit Inventory [F1]";
+            this.editInventoryButton.UseVisualStyleBackColor = true;
+            this.editInventoryButton.Click += new System.EventHandler(this.editInventoryButton_Click);
+            // 
             // closeInventoryView
             // 
             this.closeInventoryView.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeInventoryView.Location = new System.Drawing.Point(61, 524);
+            this.closeInventoryView.Location = new System.Drawing.Point(51, 524);
             this.closeInventoryView.Name = "closeInventoryView";
-            this.closeInventoryView.Size = new System.Drawing.Size(75, 23);
+            this.closeInventoryView.Size = new System.Drawing.Size(109, 23);
             this.closeInventoryView.TabIndex = 11;
-            this.closeInventoryView.Text = "Close";
+            this.closeInventoryView.Text = "Close [ESC]";
             this.closeInventoryView.UseVisualStyleBackColor = true;
             this.closeInventoryView.Click += new System.EventHandler(this.closeInventoryView_Click);
             // 
@@ -338,12 +350,9 @@ namespace POS_C
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchBox1;
         private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Label queryLabel;
         private System.Windows.Forms.Label searchLabel1;
         private System.Windows.Forms.SplitContainer inventorySplitContainer;
-        private POSDataSet pOSDataSet;
         private System.Windows.Forms.BindingSource inventoryBindingSource;
-        private POSDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;
         private POSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DataGridView inventoryDataGridView;
         private GroupBox radioBox;
@@ -358,5 +367,9 @@ namespace POS_C
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private Button editInventoryButton;
+        public Label queryLabel;
+        public POSDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;
+        public POSDataSet pOSDataSet;
     }
 }
