@@ -181,6 +181,7 @@
             // 
             // closeButton
             // 
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.closeButton.Location = new System.Drawing.Point(344, 188);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(93, 23);
@@ -236,6 +237,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.closeButton;
             this.ClientSize = new System.Drawing.Size(579, 223);
             this.Controls.Add(this.databaseErrorLabel);
             this.Controls.Add(this.skuErrorLabel);

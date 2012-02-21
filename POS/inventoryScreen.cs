@@ -107,11 +107,11 @@ namespace POS_C
             skuRadioButton.Checked = true;
 
             // Reset table
-            inventoryTableAdapter.Fill(pOSDataSet.Inventory);
+            queryReturnValue = inventoryTableAdapter.Fill(pOSDataSet.Inventory);
             queryLabel.Text = queryReturnValue + " item(s) found";
 
             // Set focus to searchBox1
-            searchBox1.Focus();
+            FocusSearchBox1();
         }
 
         private void skuRadioButton_CheckedChanged(object sender, EventArgs e)
