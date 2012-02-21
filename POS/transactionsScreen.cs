@@ -31,6 +31,7 @@ namespace POS_C
             Close();
         }
 
+        // Perform the appropriate actions when the Finalize button is clicked.
         private void finalizeButton_Click(object sender, EventArgs e)
         {
             decimal tendered;
@@ -41,9 +42,9 @@ namespace POS_C
                 tendered = Decimal.Parse(amountTenderedBox.Text);
                 transaction.finalize(tendered, this);
             }
-
             catch
             {
+                // Display the error label when an error is caught.
                 tenderedErrorLabel.Visible = true;
             }
         }
@@ -52,10 +53,12 @@ namespace POS_C
         /**
          * The goal here is to add items into a transaction and display the sum
          * total of all the items. I don't know whether or not the
-         * database needs to actually be in thus form, or if it can
+         * database needs to actually be in this form, or if it can
          * simply be referenced.
          **/
-        private void addItem(object sender, KeyPressEventArgs e)
+
+        // Hitting the Return/Enter key when in the SKU textbox.
+        private void addItem_keyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
             {
@@ -84,6 +87,7 @@ namespace POS_C
             }
         }
 
+        // Hitting the Return/Enter key when in the Amount Tendered textbox.
         private void Tender_Enter(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -97,7 +101,6 @@ namespace POS_C
                     tendered = Decimal.Parse(amountTenderedBox.Text);
                     transaction.finalize(tendered, this);
                 }
-
                 catch
                 {
                     // Returns an error when the user puts in non digit characters
@@ -106,6 +109,7 @@ namespace POS_C
             }
         }
 
+        // Sets up the form for a new transaction.
         private void newTransactionButton_Click(object sender, EventArgs e)
         {
             transaction = new Transaction();
@@ -131,6 +135,7 @@ namespace POS_C
 
         }
 
+        // Resets the form.
         public void ResetForm(transactionScreen form)
         {
             form.taxLabel.Text = "$0.00";
@@ -152,6 +157,7 @@ namespace POS_C
             form.skuBox.SelectionLength = form.skuBox.TextLength;
         }
 
+        // Counts the total number of items in the current transaction.
         public int AddItem(int sku, transactionScreen form)
         {
             int returnValue = form.inventoryTableAdapter.FillBySKU(form.pOSDataSet.Inventory, sku);
@@ -160,11 +166,14 @@ namespace POS_C
             return this.items;
         }
 
+        // Updates the total and the labels during the transaction.
         public void UpdateTotals(decimal price, System.Windows.Forms.Label subtotalLabel, System.Windows.Forms.Label taxLabel, System.Windows.Forms.Label totalLabel)
         {
             totals.UpdateTotal(price);
             totals.UpdateTotalLabels(subtotalLabel, taxLabel, totalLabel);
         }
+
+        // Calculates the transaction and displays the amount of change.
         public void finalize(decimal tendered, transactionScreen form)
         {
             decimal change; // The amount of change to be given
@@ -173,7 +182,7 @@ namespace POS_C
             form.changeLabel.Text = change.ToString("c");
             form.amountTenderedBox.Enabled = false;
             form.finalizeButton.Enabled = false;
-            form.skuBox.Text = "";
+            form.skuBox.ResetText();
             form.skuBox.Enabled = false;
 
             // ENTER DATABASE CHANGES HERE
@@ -190,7 +199,7 @@ namespace POS_C
         public void UpdateTotal(decimal price)
         {
             this.subtotal += price;
-            this.tax = taxRate * this.subtotal;
+            this.tax = Math.Round(taxRate * this.subtotal, 2, MidpointRounding.AwayFromZero);
             this.total = this.subtotal + this.tax;
         }
 
@@ -203,9 +212,9 @@ namespace POS_C
             totalLabel.Text = this.total.ToString("c");
         }
 
-        private decimal subtotal;   // The amount due before tax
-        private decimal tax;        // The amount of tax; applied to the subtotal
-        public decimal total;       // The entire cost of the transaction
-        private static decimal taxRate = 0.081M; // Nevada sales tax rate
+        private decimal subtotal;                   // The amount due before tax
+        private decimal tax;                        // The amount of tax; applied to the subtotal
+        public decimal total;                       // The entire cost of the transaction
+        private static decimal taxRate = 0.081M;    // Nevada sales tax rate
     }
 }
