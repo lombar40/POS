@@ -20,7 +20,7 @@ namespace POS_C
             KeyDown += new KeyEventHandler(homeScreen_KeyDown);
         }
 
-        // Function to handle KeyDown events on the homeScreen form.
+        // Function to handle KeyDown events from the homeScreen form.
         // F1 = opens the inventory view window
         // F2 = opens the edit inventory window
         // F3 = opens the transaction window
@@ -29,22 +29,13 @@ namespace POS_C
             switch (key.KeyCode)
             {
                 case Keys.F1:
-                    Hide();
-                    inventoryScreen inv_window = new inventoryScreen();
-                    inv_window.ShowDialog();
-                    Show();
+                    viewInventoryButton.PerformClick();
                     break;
                 case Keys.F2:
-                    Hide();
-                    editInventory edit_inv_window = new editInventory();
-                    edit_inv_window.ShowDialog();
-                    Show();
+                    editInventoryButton.PerformClick();
                     break;
                 case Keys.F3:
-                    Hide();
-                    transactionScreen trans_window = new transactionScreen();
-                    trans_window.ShowDialog();
-                    Show();
+                    transactionButton.PerformClick();
                     break;
             }
         }

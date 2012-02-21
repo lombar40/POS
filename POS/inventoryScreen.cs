@@ -34,7 +34,7 @@ namespace POS_C
             checkedRadioBox = 1;   
         }
 
-        // Set focus to the search box and highlight any current text inside
+        // Set focus to the search box and highlight any current text inside.
         private void FocusSearchBox1()
         {
             searchBox1.Focus();
@@ -42,6 +42,7 @@ namespace POS_C
             searchBox1.SelectionLength = searchBox1.TextLength;
         }
 
+        // Function to parse the searchButton when clicked.
         private void searchButton_Click(object sender, EventArgs e)
         {
             int sku;                        // Stores the SKU to be searched for
@@ -92,10 +93,11 @@ namespace POS_C
                 queryLabel.Text = "Invalid Search Query";    
             }
 
-            // Set focus to searchBox1
+            // Set focus to searchBox1.
             FocusSearchBox1();
         }
 
+        // Reset the form to initial settings.
         private void resetButton_Click(object sender, EventArgs e)
         {
             // Clear labels and textboxes
@@ -114,6 +116,8 @@ namespace POS_C
             FocusSearchBox1();
         }
 
+        /* Following 4 functions check the sku, description, price, and quantity radio buttons */
+        /* and perform their respective actions.                                               */
         private void skuRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             // Set values, labels, and hide searchBox2
@@ -162,7 +166,7 @@ namespace POS_C
             FocusSearchBox1();
         }
 
-        // Close the form
+        // Close the form.
         private void closeInventoryView_Click(object sender, EventArgs e)
         {
             Close();

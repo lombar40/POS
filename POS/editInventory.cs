@@ -17,14 +17,7 @@ namespace POS_C
             InitializeComponent();
         }
 
-        private void editInventory_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Clears all the error labels
-        /// </summary>
+        // Function that clears all the error labels on the form.
         private void clearErrorLabels()
         {
             skuErrorLabel.Visible = false;
@@ -32,6 +25,7 @@ namespace POS_C
             queryErrorLabel.Visible = false;
         }
 
+        // Perform the proper actions when the Retrieve Item button is clicked.
         private void retrieveItemButton_Click(object sender, EventArgs e)
         {
             int returnValue = 0;    // Storage of database query return value
@@ -80,6 +74,7 @@ namespace POS_C
             }  
         }
 
+        // Perform the proper actions when the Add New Item button is clicked.
         private void newItemButton_Click(object sender, EventArgs e)
         {
 
@@ -97,6 +92,7 @@ namespace POS_C
             saveButton.Enabled = true;
         } 
         
+        // Perform the proper actions when the Save button is clicked.
         private void saveButton_Click(object sender, EventArgs e)
         {
 
@@ -136,12 +132,13 @@ namespace POS_C
             sKUTextBox.Focus();
         }
 
+        // Close the form.
         private void closeButton_Click(object sender, EventArgs e)
         {
-            // Close the form
             Close();
         }
 
+        // Perform the proper actions when the Cancel button is clicked.
         private void cancelButton_Click(object sender, EventArgs e)
         {
             // Clear error labels

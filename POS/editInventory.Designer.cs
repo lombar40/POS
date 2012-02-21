@@ -235,6 +235,7 @@
             // 
             // editInventory
             // 
+            this.AcceptButton = this.retrieveItemButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
@@ -261,7 +262,6 @@
             this.Name = "editInventory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Inventory";
-            this.Load += new System.EventHandler(this.editInventory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).EndInit();
             this.ResumeLayout(false);
