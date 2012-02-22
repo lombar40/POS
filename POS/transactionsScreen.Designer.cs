@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.closeTransactions = new System.Windows.Forms.Button();
             this.skuBox = new System.Windows.Forms.TextBox();
             this.skuLabel = new System.Windows.Forms.Label();
             this.pOSDataSet = new POS_C.POSDataSet();
@@ -37,9 +36,6 @@
             this.inventoryTableAdapter = new POS_C.POSDataSetTableAdapters.InventoryTableAdapter();
             this.tableAdapterManager = new POS_C.POSDataSetTableAdapters.TableAdapterManager();
             this.inventoryDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subtotalTitleLabel = new System.Windows.Forms.Label();
             this.taxTitleLabel = new System.Windows.Forms.Label();
             this.subtotalLabel = new System.Windows.Forms.Label();
@@ -59,6 +55,12 @@
             this.currentTransactionGroupBox = new System.Windows.Forms.GroupBox();
             this.transactionSplitContainer = new System.Windows.Forms.SplitContainer();
             this.closePanel = new System.Windows.Forms.Panel();
+            this.closeTransactions = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryDataGridView)).BeginInit();
@@ -69,17 +71,6 @@
             this.transactionSplitContainer.SuspendLayout();
             this.closePanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // closeTransactions
-            // 
-            this.closeTransactions.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeTransactions.Location = new System.Drawing.Point(180, 10);
-            this.closeTransactions.Name = "closeTransactions";
-            this.closeTransactions.Size = new System.Drawing.Size(75, 23);
-            this.closeTransactions.TabIndex = 5;
-            this.closeTransactions.Text = "Close [ESC]";
-            this.closeTransactions.UseVisualStyleBackColor = true;
-            this.closeTransactions.Click += new System.EventHandler(this.closeTransactions_Click);
             // 
             // skuBox
             // 
@@ -131,7 +122,6 @@
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
             this.inventoryDataGridView.DataSource = this.inventoryBindingSource;
-            this.inventoryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inventoryDataGridView.Location = new System.Drawing.Point(0, 0);
             this.inventoryDataGridView.MultiSelect = false;
             this.inventoryDataGridView.Name = "inventoryDataGridView";
@@ -139,36 +129,14 @@
             this.inventoryDataGridView.RowHeadersVisible = false;
             this.inventoryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.inventoryDataGridView.ShowEditingIcon = false;
-            this.inventoryDataGridView.Size = new System.Drawing.Size(550, 548);
+            this.inventoryDataGridView.Size = new System.Drawing.Size(550, 502);
             this.inventoryDataGridView.TabIndex = 5;
             this.inventoryDataGridView.TabStop = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "SKU";
-            this.dataGridViewTextBoxColumn1.HeaderText = "SKU";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Price";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // subtotalTitleLabel
             // 
             this.subtotalTitleLabel.AutoSize = true;
-            this.subtotalTitleLabel.Location = new System.Drawing.Point(20, 58);
+            this.subtotalTitleLabel.Location = new System.Drawing.Point(9, 58);
             this.subtotalTitleLabel.Name = "subtotalTitleLabel";
             this.subtotalTitleLabel.Size = new System.Drawing.Size(62, 15);
             this.subtotalTitleLabel.TabIndex = 7;
@@ -177,7 +145,7 @@
             // taxTitleLabel
             // 
             this.taxTitleLabel.AutoSize = true;
-            this.taxTitleLabel.Location = new System.Drawing.Point(20, 94);
+            this.taxTitleLabel.Location = new System.Drawing.Point(9, 94);
             this.taxTitleLabel.Name = "taxTitleLabel";
             this.taxTitleLabel.Size = new System.Drawing.Size(30, 15);
             this.taxTitleLabel.TabIndex = 8;
@@ -186,7 +154,7 @@
             // subtotalLabel
             // 
             this.subtotalLabel.AutoSize = true;
-            this.subtotalLabel.Location = new System.Drawing.Point(20, 71);
+            this.subtotalLabel.Location = new System.Drawing.Point(9, 71);
             this.subtotalLabel.Name = "subtotalLabel";
             this.subtotalLabel.Size = new System.Drawing.Size(38, 15);
             this.subtotalLabel.TabIndex = 9;
@@ -196,7 +164,7 @@
             // 
             this.totalTitleLabel.AutoSize = true;
             this.totalTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalTitleLabel.Location = new System.Drawing.Point(20, 131);
+            this.totalTitleLabel.Location = new System.Drawing.Point(9, 131);
             this.totalTitleLabel.Name = "totalTitleLabel";
             this.totalTitleLabel.Size = new System.Drawing.Size(45, 18);
             this.totalTitleLabel.TabIndex = 10;
@@ -206,7 +174,7 @@
             // 
             this.totalLabel.AutoSize = true;
             this.totalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalLabel.Location = new System.Drawing.Point(20, 148);
+            this.totalLabel.Location = new System.Drawing.Point(9, 148);
             this.totalLabel.Name = "totalLabel";
             this.totalLabel.Size = new System.Drawing.Size(55, 22);
             this.totalLabel.TabIndex = 11;
@@ -215,7 +183,7 @@
             // taxLabel
             // 
             this.taxLabel.AutoSize = true;
-            this.taxLabel.Location = new System.Drawing.Point(20, 107);
+            this.taxLabel.Location = new System.Drawing.Point(9, 107);
             this.taxLabel.Name = "taxLabel";
             this.taxLabel.Size = new System.Drawing.Size(38, 15);
             this.taxLabel.TabIndex = 12;
@@ -244,7 +212,7 @@
             // totalItemsTitleLabel
             // 
             this.totalItemsTitleLabel.AutoSize = true;
-            this.totalItemsTitleLabel.Location = new System.Drawing.Point(20, 23);
+            this.totalItemsTitleLabel.Location = new System.Drawing.Point(9, 23);
             this.totalItemsTitleLabel.Name = "totalItemsTitleLabel";
             this.totalItemsTitleLabel.Size = new System.Drawing.Size(70, 15);
             this.totalItemsTitleLabel.TabIndex = 16;
@@ -253,7 +221,7 @@
             // totalItemsLabel
             // 
             this.totalItemsLabel.AutoSize = true;
-            this.totalItemsLabel.Location = new System.Drawing.Point(21, 36);
+            this.totalItemsLabel.Location = new System.Drawing.Point(10, 36);
             this.totalItemsLabel.Name = "totalItemsLabel";
             this.totalItemsLabel.Size = new System.Drawing.Size(14, 15);
             this.totalItemsLabel.TabIndex = 17;
@@ -363,12 +331,69 @@
             // 
             // closePanel
             // 
+            this.closePanel.Controls.Add(this.label2);
+            this.closePanel.Controls.Add(this.label1);
             this.closePanel.Controls.Add(this.closeTransactions);
             this.closePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.closePanel.Location = new System.Drawing.Point(0, 503);
             this.closePanel.Name = "closePanel";
             this.closePanel.Size = new System.Drawing.Size(550, 45);
             this.closePanel.TabIndex = 6;
+            // 
+            // closeTransactions
+            // 
+            this.closeTransactions.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeTransactions.Location = new System.Drawing.Point(180, 10);
+            this.closeTransactions.Name = "closeTransactions";
+            this.closeTransactions.Size = new System.Drawing.Size(75, 23);
+            this.closeTransactions.TabIndex = 5;
+            this.closeTransactions.Text = "Close [ESC]";
+            this.closeTransactions.UseVisualStyleBackColor = true;
+            this.closeTransactions.Click += new System.EventHandler(this.closeTransactions_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Red;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Location = new System.Drawing.Point(426, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "  ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(447, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Quantity <= 0";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "SKU";
+            this.dataGridViewTextBoxColumn1.HeaderText = "SKU";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Price";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Price";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 60;
             // 
             // transactionScreen
             // 
@@ -401,6 +426,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.transactionSplitContainer)).EndInit();
             this.transactionSplitContainer.ResumeLayout(false);
             this.closePanel.ResumeLayout(false);
+            this.closePanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,11 +434,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button closeTransactions;
         private System.Windows.Forms.Label skuLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.BindingSource inventoryBindingSource;
         private POSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.Label subtotalTitleLabel;
@@ -436,7 +458,13 @@
         public POSDataSetTableAdapters.InventoryTableAdapter inventoryTableAdapter;
         private System.Windows.Forms.GroupBox currentTransactionGroupBox;
         private System.Windows.Forms.SplitContainer transactionSplitContainer;
-        private System.Windows.Forms.Panel closePanel;
         public System.Windows.Forms.DataGridView inventoryDataGridView;
+        private System.Windows.Forms.Panel closePanel;
+        private System.Windows.Forms.Button closeTransactions;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
     }
 }

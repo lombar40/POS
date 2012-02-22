@@ -206,6 +206,11 @@ namespace POS_C
             stateChange(1);     // Set buttons and text boxes to state 1
         }
 
+        // Handles hotkey presses on the form
+        // F1 = Retrieve Item
+        // F2 = Add New Item
+        // F3 = Cancel
+        // F5 = Save
         private void editInventory_KeyDown(object sender, KeyEventArgs key)
         {
             switch (key.KeyCode)

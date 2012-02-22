@@ -1084,7 +1084,7 @@ namespace POS_C.POSDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual POSDataSet.InventoryDataTable GetDataBy1(global::System.Nullable<int> sku) {
+        public virtual POSDataSet.InventoryDataTable GetDataBySKU(global::System.Nullable<int> sku) {
             this.Adapter.SelectCommand = this.CommandCollection[6];
             if ((sku.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(sku.Value));

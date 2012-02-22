@@ -12,7 +12,7 @@ namespace POS_C
 {
     public partial class transactionScreen : Form
     {
-        Transaction transaction = new Transaction();
+        Transaction transaction = new Transaction();        // Creation of initial transaction upon load
 
         public transactionScreen()
         {
@@ -30,7 +30,9 @@ namespace POS_C
             inventoryDataGridView.Columns[2].DefaultCellStyle.Format = "c";        // currency format
         }
 
-        // Handle key presses on the form
+        // Handles hotkey presses on the form
+        // F3 = New Transaction
+        // F5 = Finalize
         private void transactionScreen_KeyDown(object sender, KeyEventArgs key)
         {
             switch (key.KeyCode)
@@ -57,7 +59,7 @@ namespace POS_C
             skuErrorLabel.Visible = false;
             tenderedErrorLabel.Visible = false;
 
-
+            // Try the parsing of tendered box, display error if invalid decimal or invalid tendered amount (less than total)
             try
             {
                 tendered = Decimal.Parse(amountTenderedBox.Text);
@@ -78,10 +80,14 @@ namespace POS_C
         {
             if (e.KeyChar == (char)Keys.Return)
             {
-                int sku;
-                decimal price;
+                int sku;                            // Stores the SKU of the item entered
+                decimal price;                      // Stores the price of the item entered
+
+                // Reset error labels
                 skuErrorLabel.Visible = false;
                 tenderedErrorLabel.Visible = false;
+
+                // Try parsing of entered SKU, if failed, display an error indicating the SKU wasn't found
                 try
                 {
                     sku = Int32.Parse(this.skuBox.Text);
@@ -158,9 +164,21 @@ namespace POS_C
         // Adds items to the transaction and increases the item count
         public int AddItem(int sku, transactionScreen form)
         {
+            // Attempt to find and fill the table with the SKU
             int returnValue = form.inventoryTableAdapter.FillBySKU(form.pOSDataSet.Inventory, sku);
+
+            // Check if an item was returned, and that the quantity is less than or equal to 0, and display the row in red
+            if (returnValue != 0 && form.inventoryTableAdapter.GetQuantity(sku) <= 0)
+                form.inventoryDataGridView.Rows[numOfItems].DefaultCellStyle.BackColor = Color.Red;
+
+            // Clear selection of the view upon entry of a sku
+            form.inventoryDataGridView.ClearSelection();
+
+            // If an item was returned, increase number of items
             if (returnValue != 0)
                 this.numOfItems++;
+
+            // Return number of items
             return this.numOfItems;
         }
 
@@ -174,10 +192,14 @@ namespace POS_C
         // Calculates the transaction and displays the amount of change.
         public void finalize(decimal tendered, transactionScreen form)
         {
-            decimal change;      // The amount of change to be given
-            change = tendered - totals.total;
+            decimal change;                     // Stores the amount of change to be given
+            change = tendered - totals.total;   // Calculated change
+
+            // If change is negative, throw an error indicating invalid tendered ammount (tendered < total)
             if (change < 0.00M)
                 throw new System.ArgumentException("Invalid Tendered Ammount");
+
+            // Set/display change and update the form upon completion of transaction
             form.changeTitleLabel.Visible = true;
             form.changeLabel.Text = change.ToString("c");
             form.amountTenderedBox.Enabled = false;

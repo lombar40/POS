@@ -20,10 +20,9 @@ namespace POS_C
             KeyDown += new KeyEventHandler(homeScreen_KeyDown);
         }
 
-        // Function to handle KeyDown events from the homeScreen form.
+        // Handles hotkey presses on the form
         // F1 = opens the inventory view window
-        // F2 = opens the edit inventory window
-        // F3 = opens the transaction window
+        // F2 = opens the transaction window
         private void homeScreen_KeyDown(object sender, KeyEventArgs key)
         {
             switch (key.KeyCode)
@@ -54,16 +53,7 @@ namespace POS_C
             window.ShowDialog();
             Show();
         }
-
-        // Opens up the window to edit inventory in stock on button click.
-        private void editInventoryButton_Click(object sender, EventArgs e)
-        {
-            Hide();
-            //editInventory window = new editInventory(this);
-            //window.ShowDialog();
-            Show();
-        }
-
+        
         // Provides an exit button to close the window.
         // This quits the program.
         private void exitButton_Click(object sender, EventArgs e)

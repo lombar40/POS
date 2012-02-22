@@ -176,6 +176,7 @@ namespace POS_C
             Close();
         }
 
+        // Handles pressing of edit inventory button
         private void editInventoryButton_Click(object sender, EventArgs e)
         {
             // Reset datatable to display all inventory items
@@ -191,6 +192,10 @@ namespace POS_C
             queryLabel.Text = queryReturnValue + " item(s) found";
         }
 
+        // Handles key presses on the window
+        // F1 = Edit Inventory
+        // F3 = Reset
+        // F5 = Search
         private void inventoryScreen_KeyDown(object sender, KeyEventArgs key)
         {
             switch (key.KeyCode)
