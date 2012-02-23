@@ -109,7 +109,7 @@
             this.MinimizeBox = false;
             this.Name = "homeScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "POS v0.8";
+            this.Text = "POS v1.0";
             this.inventoryBox.ResumeLayout(false);
             this.inventoryBox.PerformLayout();
             this.transactionBox.ResumeLayout(false);

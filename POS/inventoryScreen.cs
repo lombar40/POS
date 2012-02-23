@@ -95,6 +95,7 @@ namespace POS_C
             {
                 // Display error message and play sound on invalid input
                 queryLabel.Text = "Invalid Search Query";    
+                
             }
 
             // Set focus to searchBox1.

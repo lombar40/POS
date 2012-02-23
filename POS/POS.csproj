@@ -81,6 +81,7 @@
     <Compile Include="inventoryScreen.Designer.cs">
       <DependentUpon>inventoryScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Money.cs" />
     <Compile Include="POSDataSet.cs">
       <DependentUpon>POSDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -92,6 +93,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction.cs" />
     <Compile Include="transactionsScreen.cs">
       <SubType>Form</SubType>
     </Compile>
